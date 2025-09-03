@@ -2,32 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:gravity="top"
+    android:background="?android:attr/colorBackground">
 
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
+    <!-- Row: App Title + Start + Stop -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Floating Mute Button"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="32dp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:weightSum="3">
 
-    <Button
-        android:id="@+id/startButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start Floating Button"
-        android:padding="16dp"
-        android:layout_marginBottom="16dp" />
+        <!-- App Title -->
+        <TextView
+            android:id="@+id/appTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="Mute Button"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:gravity="start" />
 
-    <Button
-        android:id="@+id/stopButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="Stop Floating Button" />
+        <!-- Start Button -->
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.75"
+            android:text="Start"
+            style="?android:attr/buttonStyleSmall" />
+
+        <!-- Stop Button -->
+        <Button
+            android:id="@+id/stopButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.75"
+            android:text="Stop"
+            style="?android:attr/buttonStyleSmall" />
+    </LinearLayout>
 
 </LinearLayout>

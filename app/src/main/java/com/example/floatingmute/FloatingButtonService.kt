@@ -41,14 +41,14 @@ class FloatingButtonService : Service() {
         )
 
         params.gravity = Gravity.TOP or Gravity.START
-        params.x = dpToPx(5)
+        params.x = dpToPx(0)
         params.y = dpToPx(200)
 
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
         windowManager.addView(floatingView, params)
 
         val button = floatingView!!.findViewById<ImageButton>(R.id.muteButton)
-        button.alpha = 0.3f
+        button.alpha = 0.2f
         enableDragAndSnap(button, params)
 
         startForegroundService()
@@ -80,7 +80,7 @@ class FloatingButtonService : Service() {
     // -----------------------------
     @Suppress("ClickableViewAccessibility")
     private fun enableDragAndSnap(button: View, params: WindowManager.LayoutParams) {
-        val edgeMargin = dpToPx(5)
+        val edgeMargin = dpToPx(0)
         val clickThreshold = dpToPx(10)
 
         var startX = 0
