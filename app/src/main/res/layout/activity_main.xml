@@ -46,4 +46,43 @@
             style="?android:attr/buttonStyleSmall" />
     </LinearLayout>
 
+    <!-- Add vertical spacing by using layout_marginTop -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:weightSum="3"
+        android:layout_marginTop="24dp">
+
+        <!-- App Title -->
+        <TextView
+            android:id="@+id/screenshotText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="Screenshot Button"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:gravity="start" />
+
+        <Button
+            android:id="@+id/startScreenshotButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.75"
+            android:text="Start"
+            style="?android:attr/buttonStyleSmall" />
+
+        <Button
+            android:id="@+id/stopScreenshotButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.75"
+            android:text="Stop"
+            style="?android:attr/buttonStyleSmall" />
+
+    </LinearLayout>
+
 </LinearLayout>
