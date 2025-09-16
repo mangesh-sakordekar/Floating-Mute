@@ -85,4 +85,42 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:weightSum="3"
+        android:layout_marginTop="24dp">
+
+        <!-- App Title -->
+        <TextView
+            android:id="@+id/brightnessText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="Brightness Button"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary"
+            android:gravity="start" />
+
+        <Button
+            android:id="@+id/startBrightnessButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.75"
+            android:text="Start"
+            style="?android:attr/buttonStyleSmall" />
+
+        <Button
+            android:id="@+id/stopBrightnessButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.75"
+            android:text="Stop"
+            style="?android:attr/buttonStyleSmall" />
+
+    </LinearLayout>
+
 </LinearLayout>

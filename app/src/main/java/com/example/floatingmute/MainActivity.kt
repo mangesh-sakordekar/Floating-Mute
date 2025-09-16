@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
         val stopMuteButton = findViewById<Button>(R.id.stopButton)
         val startScreenshotButton = findViewById<Button>(R.id.startScreenshotButton)
         val stopScreenshotButton = findViewById<Button>(R.id.stopScreenshotButton)
+        val startBrightnessButton = findViewById<Button>(R.id.startBrightnessButton)
+        val stopBrightnessButton = findViewById<Button>(R.id.stopBrightnessButton)
 
         // Start Mute Button Service
         startMuteButton.setOnClickListener {
@@ -36,6 +38,21 @@ class MainActivity : AppCompatActivity() {
         // Stop Mute Button Service
         stopMuteButton.setOnClickListener {
             stopService(Intent(this, FloatingButtonService::class.java))
+        }
+
+        // Start Brightness Button Service
+        startBrightnessButton.setOnClickListener {
+            if (Settings.canDrawOverlays(this)) {
+                startService(Intent(this, BrightnessButtonService::class.java))
+            } else {
+                Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
+                requestOverlayPermission()
+            }
+        }
+
+        // Stop Brightness Button Service
+        stopBrightnessButton.setOnClickListener {
+            stopService(Intent(this, BrightnessButtonService::class.java))
         }
 
         // Start Screenshot Button Service
@@ -59,6 +76,8 @@ class MainActivity : AppCompatActivity() {
             stopService(Intent(this, ScreenshotButtonService::class.java))
         }
     }
+
+
 
     // Handle screenshot permission result
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
