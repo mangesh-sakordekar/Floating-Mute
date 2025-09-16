@@ -24,6 +24,7 @@ import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class ScreenshotButtonService : Service() {
 
     private lateinit var windowManager: WindowManager
@@ -43,7 +44,7 @@ class ScreenshotButtonService : Service() {
         val layoutType = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
         } else {
-            WindowManager.LayoutParams.TYPE_PHONE
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
         }
 
         val params = WindowManager.LayoutParams(
@@ -142,6 +143,8 @@ class ScreenshotButtonService : Service() {
             FileOutputStream(file).use {
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
             }
+
+
             // Notify MediaStore / Gallery
             val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
             intent.data = android.net.Uri.fromFile(file)
