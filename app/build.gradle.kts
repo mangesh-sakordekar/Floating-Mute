@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.floatingmute"
+    namespace = "com.example.floatingtools"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.floatingmute"
+        applicationId = "com.example.floatingtools"
         minSdk = 26
         targetSdk = 36
         versionCode = 1

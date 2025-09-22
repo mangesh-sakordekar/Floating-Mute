@@ -12,5 +12,9 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/black</item>
         <!-- Customize your theme here. -->
+        <!-- Navigation bar color -->
+        <item name="android:navigationBarColor">#000000</item> <!-- example: purple -->
+        <item name="android:windowLightNavigationBar">false</item> <!-- white icons -->
     </style>
+
 </resources>

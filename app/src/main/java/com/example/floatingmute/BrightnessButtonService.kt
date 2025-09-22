@@ -1,4 +1,4 @@
-package com.example.floatingmute
+package com.example.floatingtools
 
 import android.app.*
 import android.content.Context
@@ -74,7 +74,7 @@ class BrightnessButtonService : Service() {
                     Settings.System.SCREEN_BRIGHTNESS,
                     halfBrightness
                 )
-                Toast.makeText(this, "Brightness reduced to half", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Brightness reduced", Toast.LENGTH_SHORT).show()
             } else {
                 Settings.System.putInt(
                     contentResolver,

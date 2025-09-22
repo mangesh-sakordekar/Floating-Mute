@@ -1,4 +1,4 @@
-package com.example.floatingmute
+package com.example.floatingtools
 
 
 import android.app.*

@@ -1,126 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="top"
-    android:background="?android:attr/colorBackground">
+    android:layout_height="match_parent">
 
-    <!-- Row: App Title + Start + Stop -->
+    <!-- Background Image -->
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_background"
+        android:contentDescription="@string/app_name" />
+
+    <!-- Dark Blur Overlay -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#BB000000" />
+
+    <!-- Foreground UI -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:weightSum="3">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="18dp"
+        android:gravity="top">
 
-        <!-- App Title -->
-        <TextView
-            android:id="@+id/appTitle"
-            android:layout_width="0dp"
+        <!-- Row 1: Mute Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:text="Mute Button"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="?android:attr/textColorPrimary"
-            android:gravity="start" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="18dp"
+            android:background="@drawable/row_background">
 
-        <!-- Start Button -->
-        <Button
-            android:id="@+id/startButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.75"
-            android:text="Start"
-            style="?android:attr/buttonStyleSmall" />
+            <TextView
+                android:id="@+id/appTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Mute Button"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="start" />
 
-        <!-- Stop Button -->
-        <Button
-            android:id="@+id/stopButton"
-            android:layout_width="0dp"
+            <ImageButton
+                android:id="@+id/startButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/btn_start_background"
+                android:src="@drawable/ic_start"
+                android:contentDescription="@string/start"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="12dp"/>
+
+            <ImageButton
+                android:id="@+id/stopButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/btn_stop_background"
+                android:src="@drawable/ic_stop"
+                android:contentDescription="@string/stop"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="12dp"/>
+        </LinearLayout>
+
+        <!-- Row 2: Screenshot Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.75"
-            android:text="Stop"
-            style="?android:attr/buttonStyleSmall" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="18dp"
+            android:background="@drawable/row_background">
+
+            <TextView
+                android:id="@+id/screenshotText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Screenshot Button"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="start" />
+
+            <ImageButton
+                android:id="@+id/startScreenshotButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/btn_start_background"
+                android:src="@drawable/ic_start"
+                android:contentDescription="@string/start"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="12dp"/>
+
+            <ImageButton
+                android:id="@+id/stopScreenshotButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/btn_stop_background"
+                android:src="@drawable/ic_stop"
+                android:contentDescription="@string/stop"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="12dp" />
+        </LinearLayout>
+
+        <!-- Row 3: Brightness Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="18dp"
+            android:background="@drawable/row_background">
+
+            <TextView
+                android:id="@+id/brightnessText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Brightness Button"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="start" />
+
+            <ImageButton
+                android:id="@+id/startBrightnessButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/btn_start_background"
+                android:src="@drawable/ic_start"
+                android:contentDescription="@string/start"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="12dp"/>
+
+            <ImageButton
+                android:id="@+id/stopBrightnessButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/btn_stop_background"
+                android:src="@drawable/ic_stop"
+                android:contentDescription="@string/stop"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="12dp"/>
+        </LinearLayout>
     </LinearLayout>
-
-    <!-- Add vertical spacing by using layout_marginTop -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:weightSum="3"
-        android:layout_marginTop="24dp">
-
-        <!-- App Title -->
-        <TextView
-            android:id="@+id/screenshotText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:text="Screenshot Button"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="?android:attr/textColorPrimary"
-            android:gravity="start" />
-
-        <Button
-            android:id="@+id/startScreenshotButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.75"
-            android:text="Start"
-            style="?android:attr/buttonStyleSmall" />
-
-        <Button
-            android:id="@+id/stopScreenshotButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.75"
-            android:text="Stop"
-            style="?android:attr/buttonStyleSmall" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:weightSum="3"
-        android:layout_marginTop="24dp">
-
-        <!-- App Title -->
-        <TextView
-            android:id="@+id/brightnessText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:text="Brightness Button"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="?android:attr/textColorPrimary"
-            android:gravity="start" />
-
-        <Button
-            android:id="@+id/startBrightnessButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.75"
-            android:text="Start"
-            style="?android:attr/buttonStyleSmall" />
-
-        <Button
-            android:id="@+id/stopBrightnessButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.75"
-            android:text="Stop"
-            style="?android:attr/buttonStyleSmall" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

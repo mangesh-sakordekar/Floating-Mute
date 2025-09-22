@@ -1,4 +1,4 @@
-package com.example.floatingmute
+package com.example.floatingtools
 
 import android.app.Activity
 import android.content.Intent
@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import android.media.projection.MediaProjectionManager
 import android.content.Context
+import android.net.Uri
+import android.widget.ImageButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,12 +20,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val startMuteButton = findViewById<Button>(R.id.startButton)
-        val stopMuteButton = findViewById<Button>(R.id.stopButton)
-        val startScreenshotButton = findViewById<Button>(R.id.startScreenshotButton)
-        val stopScreenshotButton = findViewById<Button>(R.id.stopScreenshotButton)
-        val startBrightnessButton = findViewById<Button>(R.id.startBrightnessButton)
-        val stopBrightnessButton = findViewById<Button>(R.id.stopBrightnessButton)
+        val startMuteButton = findViewById<ImageButton>(R.id.startButton)
+        val stopMuteButton = findViewById<ImageButton>(R.id.stopButton)
+        val startScreenshotButton = findViewById<ImageButton>(R.id.startScreenshotButton)
+        val stopScreenshotButton = findViewById<ImageButton>(R.id.stopScreenshotButton)
+        val startBrightnessButton = findViewById<ImageButton>(R.id.startBrightnessButton)
+        val stopBrightnessButton = findViewById<ImageButton>(R.id.stopBrightnessButton)
 
         // Start Mute Button Service
         startMuteButton.setOnClickListener {
@@ -42,6 +44,7 @@ class MainActivity : AppCompatActivity() {
 
         // Start Brightness Button Service
         startBrightnessButton.setOnClickListener {
+            checkAndRequestWriteSettings()
             if (Settings.canDrawOverlays(this)) {
                 startService(Intent(this, BrightnessButtonService::class.java))
             } else {
@@ -99,5 +102,16 @@ class MainActivity : AppCompatActivity() {
             android.net.Uri.parse("package:$packageName")
         )
         startActivity(intent)
+    }
+
+    private fun checkAndRequestWriteSettings() {
+        if (!Settings.System.canWrite(this)) {
+            val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS).apply {
+                data = Uri.parse("package:$packageName")
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            startActivity(intent)
+            Toast.makeText(this, "Please allow Modify System Settings", Toast.LENGTH_LONG).show()
+        }
     }
 }
