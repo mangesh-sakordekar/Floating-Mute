@@ -3,6 +3,10 @@
 package="com.example.floatingtools"
 xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
@@ -14,6 +18,7 @@ xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
 
     <application
@@ -56,6 +61,11 @@ xmlns:tools="http://schemas.android.com/tools">
 
         <service
             android:name=".BrightnessButtonService"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection" />
+
+        <service
+            android:name=".FlashlightButtonService"
             android:exported="false"
             android:foregroundServiceType="mediaProjection" />
 

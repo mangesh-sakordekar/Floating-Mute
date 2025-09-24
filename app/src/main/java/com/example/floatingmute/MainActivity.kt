@@ -26,10 +26,15 @@ class MainActivity : AppCompatActivity() {
 
         val startMuteButton = findViewById<ImageButton>(R.id.startButton)
         val stopMuteButton = findViewById<ImageButton>(R.id.stopButton)
+
         val startScreenshotButton = findViewById<ImageButton>(R.id.startScreenshotButton)
         val stopScreenshotButton = findViewById<ImageButton>(R.id.stopScreenshotButton)
+
         val startBrightnessButton = findViewById<ImageButton>(R.id.startBrightnessButton)
         val stopBrightnessButton = findViewById<ImageButton>(R.id.stopBrightnessButton)
+
+        val startFlashlightButton = findViewById<ImageButton>(R.id.startFlashlightButton)
+        val stopFlashlightButton = findViewById<ImageButton>(R.id.stopFlashlightButton)
 
         MobileAds.initialize(this@MainActivity)
         loadBannerAd()
@@ -84,6 +89,21 @@ class MainActivity : AppCompatActivity() {
         // Stop Screenshot Button Service
         stopScreenshotButton.setOnClickListener {
             stopService(Intent(this, ScreenshotButtonService::class.java))
+        }
+
+        // Start Mute Button Service
+        startFlashlightButton.setOnClickListener {
+            if (Settings.canDrawOverlays(this)) {
+                startService(Intent(this, FlashlightButtonService::class.java))
+            } else {
+                Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
+                requestOverlayPermission()
+            }
+        }
+
+        // Stop Mute Button Service
+        stopFlashlightButton.setOnClickListener {
+            stopService(Intent(this, FlashlightButtonService::class.java))
         }
     }
 
