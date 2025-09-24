@@ -68,7 +68,7 @@ class BrightnessButtonService : Service() {
 
             if (!isDimmed) {
                 originalBrightness = brightness.toFloat()
-                val halfBrightness = (brightness / 4).coerceAtLeast(20)
+                val halfBrightness = (brightness / 4).coerceAtLeast(15)
                 Settings.System.putInt(
                     contentResolver,
                     Settings.System.SCREEN_BRIGHTNESS,

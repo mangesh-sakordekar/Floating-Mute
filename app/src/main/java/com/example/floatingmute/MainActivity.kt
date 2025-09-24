@@ -11,10 +11,14 @@ import android.media.projection.MediaProjectionManager
 import android.content.Context
 import android.net.Uri
 import android.widget.ImageButton
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 
 class MainActivity : AppCompatActivity() {
 
     private val SCREENSHOT_REQUEST_CODE = 1001
+    private var _bannerAd: AdView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +30,9 @@ class MainActivity : AppCompatActivity() {
         val stopScreenshotButton = findViewById<ImageButton>(R.id.stopScreenshotButton)
         val startBrightnessButton = findViewById<ImageButton>(R.id.startBrightnessButton)
         val stopBrightnessButton = findViewById<ImageButton>(R.id.stopBrightnessButton)
+
+        MobileAds.initialize(this@MainActivity)
+        loadBannerAd()
 
         // Start Mute Button Service
         startMuteButton.setOnClickListener {
@@ -80,7 +87,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    private fun loadBannerAd() {
+        _bannerAd = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        _bannerAd?.loadAd(adRequest)
+    }
 
     // Handle screenshot permission result
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

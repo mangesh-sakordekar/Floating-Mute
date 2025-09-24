@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <solid android:color="#2AFFFFFF"/> <!-- translucent white haze -->
-    <corners android:radius="16dp" />
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Shadow layer -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#33000000" /> <!-- faint black shadow -->
+            <corners android:radius="20dp" />
+        </shape>
+    </item>
+
+    <!-- Foreground layer -->
+    <item android:left="2dp" android:top="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#1AFFFFFF" /> <!-- semi-transparent black -->
+            <corners android:radius="16dp" />
+            <stroke
+                android:width="2dp"
+                android:color="#1BFFFFFF" />
+        </shape>
+    </item>
+</layer-list>
+
+
