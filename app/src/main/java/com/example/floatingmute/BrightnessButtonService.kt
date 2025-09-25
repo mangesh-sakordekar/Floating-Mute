@@ -139,12 +139,18 @@ class BrightnessButtonService : Service() {
                         // Small movement → treat as click
                         toggleBrightness()
                     } else {
-                        // Snap to nearest horizontal edge
-                        val middleX = params.x + v.width / 2
-                        val snapLeft = edgeMargin
-                        val snapRight = screenWidth - v.width - edgeMargin
-                        params.x = if (middleX >= screenWidth / 2) snapRight else snapLeft
-                        windowManager.updateViewLayout(floatingView, params)
+
+                        if (params.y > screenHeight - 150){
+                            stopSelf()
+                        }
+                        else {
+                            // Snap to nearest horizontal edge
+                            val middleX = params.x + v.width / 2
+                            val snapLeft = edgeMargin
+                            val snapRight = screenWidth - v.width - edgeMargin
+                            params.x = if (middleX >= screenWidth / 2) snapRight else snapLeft
+                            windowManager.updateViewLayout(floatingView, params)
+                        }
                     }
                     true
                 }
