@@ -69,6 +69,11 @@ xmlns:tools="http://schemas.android.com/tools">
             android:exported="false"
             android:foregroundServiceType="mediaProjection" />
 
+        <service
+            android:name=".StopwatchButtonService"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection" />
+
 
     </application>
 

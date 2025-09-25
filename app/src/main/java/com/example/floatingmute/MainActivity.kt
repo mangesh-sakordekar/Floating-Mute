@@ -36,6 +36,9 @@ class MainActivity : AppCompatActivity() {
         val startFlashlightButton = findViewById<ImageButton>(R.id.startFlashlightButton)
         val stopFlashlightButton = findViewById<ImageButton>(R.id.stopFlashlightButton)
 
+        val startStopwatchButton = findViewById<ImageButton>(R.id.startStopwatchButton)
+        val stopStopwatchButton = findViewById<ImageButton>(R.id.stopStopwatchButton)
+
         MobileAds.initialize(this@MainActivity)
         loadBannerAd()
 
@@ -104,6 +107,21 @@ class MainActivity : AppCompatActivity() {
         // Stop Mute Button Service
         stopFlashlightButton.setOnClickListener {
             stopService(Intent(this, FlashlightButtonService::class.java))
+        }
+
+        // Start Mute Button Service
+        startStopwatchButton.setOnClickListener {
+            if (Settings.canDrawOverlays(this)) {
+                startService(Intent(this, StopwatchButtonService::class.java))
+            } else {
+                Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
+                requestOverlayPermission()
+            }
+        }
+
+        // Stop Mute Button Service
+        stopStopwatchButton.setOnClickListener {
+            stopService(Intent(this, StopwatchButtonService::class.java))
         }
     }
 
