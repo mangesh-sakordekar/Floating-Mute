@@ -1,6 +1,7 @@
 package com.example.floatingtools
 
 import android.app.Activity
+import android.app.NotificationManager
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
@@ -39,6 +40,9 @@ class MainActivity : AppCompatActivity() {
         val startStopwatchButton = findViewById<ImageButton>(R.id.startStopwatchButton)
         val stopStopwatchButton = findViewById<ImageButton>(R.id.stopStopwatchButton)
 
+        val startNotificationButton = findViewById<ImageButton>(R.id.startNotificationButton)
+        val stopNotificationButton = findViewById<ImageButton>(R.id.stopNotificationButton)
+
         MobileAds.initialize(this@MainActivity)
         loadBannerAd()
 
@@ -59,9 +63,14 @@ class MainActivity : AppCompatActivity() {
 
         // Start Brightness Button Service
         startBrightnessButton.setOnClickListener {
-            checkAndRequestWriteSettings()
             if (Settings.canDrawOverlays(this)) {
-                startService(Intent(this, BrightnessButtonService::class.java))
+                if (Settings.System.canWrite(this)) {
+                    startService(Intent(this, BrightnessButtonService::class.java))
+                }
+                else{
+                    Toast.makeText(this, "Write Settings permission required", Toast.LENGTH_SHORT).show()
+                    checkAndRequestWriteSettings()
+                }
             } else {
                 Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
                 requestOverlayPermission()
@@ -123,6 +132,28 @@ class MainActivity : AppCompatActivity() {
         stopStopwatchButton.setOnClickListener {
             stopService(Intent(this, StopwatchButtonService::class.java))
         }
+
+        // Start Notification Button Service
+        startNotificationButton.setOnClickListener {
+            if (Settings.canDrawOverlays(this)) {
+                val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                if (notificationManager.isNotificationPolicyAccessGranted){
+                    startService(Intent(this, NotificationModeButtonService::class.java))
+                }
+                else{
+                    Toast.makeText(this, "Notification Policy permission required", Toast.LENGTH_SHORT).show()
+                    changeDoNotDisturbState()
+                }
+            } else {
+                Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
+                requestOverlayPermission()
+            }
+        }
+
+        // Stop Mute Button Service
+        stopNotificationButton.setOnClickListener {
+            stopService(Intent(this, NotificationModeButtonService::class.java))
+        }
     }
 
     private fun loadBannerAd() {
@@ -161,6 +192,17 @@ class MainActivity : AppCompatActivity() {
             }
             startActivity(intent)
             Toast.makeText(this, "Please allow Modify System Settings", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun changeDoNotDisturbState() {
+        // Check if the permission is granted
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (!notificationManager.isNotificationPolicyAccessGranted) {
+
+            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) // Required if starting from a Service
+            startActivity(intent)
         }
     }
 }

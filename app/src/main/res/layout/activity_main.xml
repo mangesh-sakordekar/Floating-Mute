@@ -211,7 +211,53 @@
                 android:padding="12dp"/>
         </LinearLayout>
 
-        <!-- Row 5: Stopwatch Button -->
+        <!-- Row 5: Notification Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/row_background">
+
+            <TextView
+                android:id="@+id/notificationText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Notification Toggle"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="start" />
+
+            <ImageButton
+                android:id="@+id/startNotificationButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/btn_start_background"
+                android:src="@drawable/ic_start"
+                android:contentDescription="@string/start"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="12dp"/>
+
+            <ImageButton
+                android:id="@+id/stopNotificationButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/btn_stop_background"
+                android:src="@drawable/ic_stop"
+                android:contentDescription="@string/stop"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="12dp"/>
+        </LinearLayout>
+
+        <!-- Row 6: Stopwatch Button -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

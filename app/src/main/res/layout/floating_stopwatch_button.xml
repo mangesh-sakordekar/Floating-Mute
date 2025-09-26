@@ -5,11 +5,11 @@
 
     <TextView
         android:id="@+id/stopwatchTime"
-        android:layout_width="90dp"
+        android:layout_width="100dp"
         android:layout_height="30dp"
         android:gravity="center"
         android:background="@drawable/btn_stopwatch_background"
-        android:text="00:00:00"
+        android:text="00:00.000"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"

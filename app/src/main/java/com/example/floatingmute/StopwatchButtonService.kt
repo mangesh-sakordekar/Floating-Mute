@@ -83,9 +83,9 @@ class StopwatchButtonService : Service() {
                     val total = elapsedTime + (SystemClock.elapsedRealtime() - startTime)
                     val minutes = (total / 1000) / 60
                     val seconds = (total / 1000) % 60
-                    val millis = (total % 1000) / 10 // show 2-digit centiseconds
+                    val millis = (total % 1000) // show 2-digit centiseconds
 
-                    stopwatchText.text = String.format("%02d:%02d.%02d", minutes, seconds, millis)
+                    stopwatchText.text = String.format("%02d:%02d.%03d", minutes, seconds, millis)
 
                     handler.postDelayed(this, 50) // update every 50ms for smooth display
                 }
@@ -99,7 +99,7 @@ class StopwatchButtonService : Service() {
         handler.removeCallbacks(timerRunnable!!)
         isRunning = false
         elapsedTime = 0L
-        stopwatchText.text = "00:00:00"
+        stopwatchText.text = "00:00.000"
     }
 
     // -----------------------------
