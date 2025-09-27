@@ -12,6 +12,7 @@ import android.media.projection.MediaProjectionManager
 import android.content.Context
 import android.net.Uri
 import android.widget.ImageButton
+import android.widget.TextView
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
@@ -19,32 +20,74 @@ import com.google.android.gms.ads.MobileAds
 class MainActivity : AppCompatActivity() {
 
     private val SCREENSHOT_REQUEST_CODE = 1001
+    private val OVERLAY_REQUEST_CODE = 1002
+    private val WRITE_REQUEST_CODE = 1003
+    private val DND_REQUEST_CODE = 1004
     private var _bannerAd: AdView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val startMuteButton = findViewById<ImageButton>(R.id.startButton)
+        val overlayPermissionButton = findViewById<TextView>(R.id.overlayPermissionText)
+        val writePermissionButton = findViewById<TextView>(R.id.writePermissionText)
+        val dndPermissionButton = findViewById<TextView>(R.id.dndPermissionText)
+
+
+        val startMuteButton = findViewById<TextView>(R.id.muteText)
         val stopMuteButton = findViewById<ImageButton>(R.id.stopButton)
 
-        val startScreenshotButton = findViewById<ImageButton>(R.id.startScreenshotButton)
+        val startScreenshotButton = findViewById<TextView>(R.id.screenshotText)
         val stopScreenshotButton = findViewById<ImageButton>(R.id.stopScreenshotButton)
 
-        val startBrightnessButton = findViewById<ImageButton>(R.id.startBrightnessButton)
+        val startBrightnessButton = findViewById<TextView>(R.id.brightnessText)
         val stopBrightnessButton = findViewById<ImageButton>(R.id.stopBrightnessButton)
 
-        val startFlashlightButton = findViewById<ImageButton>(R.id.startFlashlightButton)
+        val startFlashlightButton = findViewById<TextView>(R.id.flashlightText)
         val stopFlashlightButton = findViewById<ImageButton>(R.id.stopFlashlightButton)
 
-        val startStopwatchButton = findViewById<ImageButton>(R.id.startStopwatchButton)
+        val startStopwatchButton = findViewById<TextView>(R.id.stopwatchText)
         val stopStopwatchButton = findViewById<ImageButton>(R.id.stopStopwatchButton)
 
-        val startNotificationButton = findViewById<ImageButton>(R.id.startNotificationButton)
+        val startNotificationButton = findViewById<TextView>(R.id.notificationText)
         val stopNotificationButton = findViewById<ImageButton>(R.id.stopNotificationButton)
 
         MobileAds.initialize(this@MainActivity)
         loadBannerAd()
+
+        updateOverlayBackground()
+        updateWriteBackground()
+        updateDNDBackground()
+
+        overlayPermissionButton.setOnClickListener {
+            if (Settings.canDrawOverlays(this)) {
+                Toast.makeText(this, "Overlay permission already granted!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
+                requestOverlayPermission()
+            }
+        }
+
+        writePermissionButton.setOnClickListener {
+            if (Settings.System.canWrite(this)) {
+                Toast.makeText(this, "Write Settings permission already granted", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                Toast.makeText(this, "Write Settings permission required", Toast.LENGTH_SHORT).show()
+                checkAndRequestWriteSettings()
+            }
+        }
+
+        dndPermissionButton.setOnClickListener {
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            if (notificationManager.isNotificationPolicyAccessGranted){
+                Toast.makeText(this, "Notification Policy permission already granted!", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                Toast.makeText(this, "Notification Policy permission required", Toast.LENGTH_SHORT).show()
+                changeDoNotDisturbState()
+            }
+        }
 
         // Start Mute Button Service
         startMuteButton.setOnClickListener {
@@ -156,6 +199,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        updateOverlayBackground()
+        updateWriteBackground()
+        updateDNDBackground()
+    }
+
+
     private fun loadBannerAd() {
         _bannerAd = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()
@@ -173,6 +224,12 @@ class MainActivity : AppCompatActivity() {
             startService(intent)
         } else if (requestCode == SCREENSHOT_REQUEST_CODE) {
             Toast.makeText(this, "Screenshot permission denied", Toast.LENGTH_SHORT).show()
+        } else if (requestCode == OVERLAY_REQUEST_CODE){
+            updateOverlayBackground()
+        } else if (requestCode == WRITE_REQUEST_CODE){
+            updateWriteBackground()
+        } else if (requestCode == DND_REQUEST_CODE){
+            updateDNDBackground()
         }
     }
 
@@ -181,7 +238,7 @@ class MainActivity : AppCompatActivity() {
             Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
             android.net.Uri.parse("package:$packageName")
         )
-        startActivity(intent)
+        startActivityForResult(intent, 1002)
     }
 
     private fun checkAndRequestWriteSettings() {
@@ -190,8 +247,8 @@ class MainActivity : AppCompatActivity() {
                 data = Uri.parse("package:$packageName")
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
-            startActivity(intent)
-            Toast.makeText(this, "Please allow Modify System Settings", Toast.LENGTH_LONG).show()
+            startActivityForResult(intent, WRITE_REQUEST_CODE)
+            //Toast.makeText(this, "Please allow Modify System Settings", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -202,7 +259,38 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) // Required if starting from a Service
-            startActivity(intent)
+            startActivityForResult(intent, DND_REQUEST_CODE)
+        }
+    }
+
+    private fun updateOverlayBackground(){
+        val overlayPermissionButton = findViewById<TextView>(R.id.overlayPermissionText)
+        if(Settings.canDrawOverlays(this)){
+            overlayPermissionButton.setBackgroundResource(R.drawable.row_green_background)
+        }
+        else{
+            overlayPermissionButton.setBackgroundResource(R.drawable.row_red_background)
+        }
+    }
+
+    private fun updateWriteBackground(){
+        val writePermissionButton = findViewById<TextView>(R.id.writePermissionText)
+        if(Settings.System.canWrite(this)){
+            writePermissionButton.setBackgroundResource(R.drawable.row_green_background)
+        }
+        else{
+            writePermissionButton.setBackgroundResource(R.drawable.row_red_background)
+        }
+    }
+
+    private fun updateDNDBackground(){
+        val dndPermissionButton = findViewById<TextView>(R.id.dndPermissionText)
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if(notificationManager.isNotificationPolicyAccessGranted){
+            dndPermissionButton.setBackgroundResource(R.drawable.row_green_background)
+        }
+        else{
+            dndPermissionButton.setBackgroundResource(R.drawable.row_red_background)
         }
     }
 }
