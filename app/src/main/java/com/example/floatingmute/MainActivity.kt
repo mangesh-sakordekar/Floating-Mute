@@ -52,6 +52,9 @@ class MainActivity : AppCompatActivity() {
         val startNotificationButton = findViewById<TextView>(R.id.notificationText)
         val stopNotificationButton = findViewById<ImageButton>(R.id.stopNotificationButton)
 
+        val startDNDButton = findViewById<TextView>(R.id.dndText)
+        val stopDNDButton = findViewById<ImageButton>(R.id.stopDNDButton)
+
         MobileAds.initialize(this@MainActivity)
         loadBannerAd()
 
@@ -196,6 +199,28 @@ class MainActivity : AppCompatActivity() {
         // Stop Mute Button Service
         stopNotificationButton.setOnClickListener {
             stopService(Intent(this, NotificationModeButtonService::class.java))
+        }
+
+        // Start Notification Button Service
+        startDNDButton.setOnClickListener {
+            if (Settings.canDrawOverlays(this)) {
+                val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                if (notificationManager.isNotificationPolicyAccessGranted){
+                    startService(Intent(this, DNDButtonService::class.java))
+                }
+                else{
+                    Toast.makeText(this, "Notification Policy permission required", Toast.LENGTH_SHORT).show()
+                    changeDoNotDisturbState()
+                }
+            } else {
+                Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
+                requestOverlayPermission()
+            }
+        }
+
+        // Stop Mute Button Service
+        stopDNDButton.setOnClickListener {
+            stopService(Intent(this, DNDButtonService::class.java))
         }
     }
 
