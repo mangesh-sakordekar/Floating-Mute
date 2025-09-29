@@ -55,6 +55,9 @@ class MainActivity : AppCompatActivity() {
         val startDNDButton = findViewById<TextView>(R.id.dndText)
         val stopDNDButton = findViewById<ImageButton>(R.id.stopDNDButton)
 
+        val startScreenOnButton = findViewById<TextView>(R.id.screenOnText)
+        val stopScreenOnButton = findViewById<ImageButton>(R.id.stopScreenOnButton)
+
         MobileAds.initialize(this@MainActivity)
         loadBannerAd()
 
@@ -221,6 +224,21 @@ class MainActivity : AppCompatActivity() {
         // Stop Mute Button Service
         stopDNDButton.setOnClickListener {
             stopService(Intent(this, DNDButtonService::class.java))
+        }
+
+        // Start Screen On Button Service
+        startScreenOnButton.setOnClickListener {
+            if (Settings.canDrawOverlays(this)) {
+                startService(Intent(this, ScreenOnButtonService::class.java))
+            } else {
+                Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
+                requestOverlayPermission()
+            }
+        }
+
+        // Stop Screen On Button Service
+        stopScreenOnButton.setOnClickListener {
+            stopService(Intent(this, ScreenOnButtonService::class.java))
         }
     }
 
