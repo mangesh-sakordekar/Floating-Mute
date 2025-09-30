@@ -37,7 +37,7 @@ class DNDButtonService : Service() {
 
         params.gravity = Gravity.TOP or Gravity.START
         params.x = dpToPx(0)
-        params.y = dpToPx(200)
+        params.y = dpToPx(160)
 
         modeIcon = floatingView.findViewById(R.id.dndButton)
         modeIcon.alpha = 0.3f
@@ -146,12 +146,12 @@ class DNDButtonService : Service() {
     // Foreground Service
     // -----------------------------------
     private fun startForegroundService() {
-        val channelId = "FloatingButtonChannel"
+        val channelId = "FloatingToolsChannel"
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 channelId,
-                "Floating DND Service",
+                "Floating Tools Service",
                 NotificationManager.IMPORTANCE_LOW
             )
             val manager = getSystemService(NotificationManager::class.java)
@@ -159,8 +159,8 @@ class DNDButtonService : Service() {
         }
 
         val notification = NotificationCompat.Builder(this, channelId)
-            .setContentTitle("Floating DND Button")
-            .setSmallIcon(R.drawable.ic_dnd_on)
+            .setContentTitle("Floating Tools Running")
+            .setSmallIcon(R.drawable.ic_settings)
             .build()
 
         startForeground(2, notification)

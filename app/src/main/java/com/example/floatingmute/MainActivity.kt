@@ -5,7 +5,6 @@ import android.app.NotificationManager
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import android.media.projection.MediaProjectionManager
@@ -57,6 +56,9 @@ class MainActivity : AppCompatActivity() {
 
         val startScreenOnButton = findViewById<TextView>(R.id.screenOnText)
         val stopScreenOnButton = findViewById<ImageButton>(R.id.stopScreenOnButton)
+
+        val startTimerButton = findViewById<TextView>(R.id.countdownTimerText)
+        val stopTimerButton = findViewById<ImageButton>(R.id.stopTimerButton)
 
         MobileAds.initialize(this@MainActivity)
         loadBannerAd()
@@ -239,6 +241,21 @@ class MainActivity : AppCompatActivity() {
         // Stop Screen On Button Service
         stopScreenOnButton.setOnClickListener {
             stopService(Intent(this, ScreenOnButtonService::class.java))
+        }
+
+        // Start Mute Button Service
+        startTimerButton.setOnClickListener {
+            if (Settings.canDrawOverlays(this)) {
+                startService(Intent(this, CountdownTimerButtonService::class.java))
+            } else {
+                Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
+                requestOverlayPermission()
+            }
+        }
+
+        // Stop Mute Button Service
+        stopTimerButton.setOnClickListener {
+            stopService(Intent(this, CountdownTimerButtonService::class.java))
         }
     }
 

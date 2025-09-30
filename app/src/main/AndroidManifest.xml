@@ -21,6 +21,7 @@ xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
 
     <application
@@ -54,42 +55,56 @@ xmlns:tools="http://schemas.android.com/tools">
             android:name=".FloatingButtonService"
             android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection" />
+            android:foregroundServiceType="mediaProjection"
+            tools:ignore="ForegroundServicePermission" />
 
         <service
             android:name=".ScreenshotButtonService"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection" />
+            android:foregroundServiceType="mediaProjection"
+            tools:ignore="ForegroundServicePermission" />
 
         <service
             android:name=".BrightnessButtonService"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection" />
+            android:foregroundServiceType="mediaProjection"
+            tools:ignore="ForegroundServicePermission" />
 
         <service
             android:name=".FlashlightButtonService"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection" />
+            android:foregroundServiceType="mediaProjection"
+            tools:ignore="ForegroundServicePermission" />
 
         <service
             android:name=".StopwatchButtonService"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection" />
+            android:foregroundServiceType="mediaProjection"
+            tools:ignore="ForegroundServicePermission" />
 
         <service
             android:name=".NotificationModeButtonService"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection" />
+            android:foregroundServiceType="mediaProjection"
+            tools:ignore="ForegroundServicePermission" />
 
         <service
             android:name=".DNDButtonService"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection" />
+            android:foregroundServiceType="mediaProjection"
+            tools:ignore="ForegroundServicePermission" />
 
         <service
             android:name=".ScreenOnButtonService"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection" />
+            android:foregroundServiceType="mediaProjection"
+            tools:ignore="ForegroundServicePermission" />
+
+        <service
+            android:name=".CountdownTimerButtonService"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection"
+            tools:ignore="ForegroundServicePermission" />
 
 
     </application>

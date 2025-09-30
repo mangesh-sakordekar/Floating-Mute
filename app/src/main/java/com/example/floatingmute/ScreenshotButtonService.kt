@@ -13,7 +13,6 @@ import android.media.projection.MediaProjectionManager
 import android.os.Build
 import android.os.Environment
 import android.os.IBinder
-import android.util.DisplayMetrics
 import android.view.*
 import android.widget.ImageButton
 import android.widget.Toast
@@ -57,7 +56,7 @@ class ScreenshotButtonService : Service() {
 
         params.gravity = Gravity.TOP or Gravity.START
         params.x = dpToPx(0)
-        params.y = dpToPx(200)
+        params.y = dpToPx(160)
 
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
         windowManager.addView(floatingView, params)
@@ -221,12 +220,12 @@ class ScreenshotButtonService : Service() {
     }
 
     private fun startForegroundService() {
-        val channelId = "ScreenshotButtonChannel"
+        val channelId = "FloatingToolsChannel"
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 channelId,
-                "Floating Screenshot Button Service",
+                "Floating Tools Service",
                 NotificationManager.IMPORTANCE_LOW
             )
             val manager = getSystemService(NotificationManager::class.java)
@@ -234,8 +233,8 @@ class ScreenshotButtonService : Service() {
         }
 
         val notification = NotificationCompat.Builder(this, channelId)
-            .setContentTitle("Screenshot Button Running")
-            .setSmallIcon(R.drawable.ic_screenshot)
+            .setContentTitle("Floating Tools Running")
+            .setSmallIcon(R.drawable.ic_settings)
             .build()
 
         startForeground(2, notification)

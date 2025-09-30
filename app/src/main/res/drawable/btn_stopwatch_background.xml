@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
     <!-- Semi-transparent dark background -->
-    <solid android:color="#66FFFFFF" />
+    <solid android:color="#FFFFFF" />
 
     <!-- Rounded corners -->
     <corners android:radius="12dp" />
@@ -11,5 +11,5 @@
     <!-- Subtle stroke -->
     <stroke
         android:width="2dp"
-        android:color="#22000000" />
+        android:color="@android:color/darker_gray" />
 </shape>

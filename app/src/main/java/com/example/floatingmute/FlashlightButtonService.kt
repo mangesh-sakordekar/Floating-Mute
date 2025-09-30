@@ -5,13 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.PixelFormat
 import android.hardware.camera2.CameraManager
-import android.media.AudioManager
 import android.os.Build
 import android.os.IBinder
-import android.provider.Settings
 import android.view.*
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.core.app.NotificationCompat
 
 class FlashlightButtonService : Service() {
@@ -50,13 +47,13 @@ class FlashlightButtonService : Service() {
 
         params.gravity = Gravity.TOP or Gravity.START
         params.x = dpToPx(0)
-        params.y = dpToPx(200)
+        params.y = dpToPx(160)
 
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
         windowManager.addView(floatingView, params)
 
         val button = floatingView!!.findViewById<ImageButton>(R.id.flashlightButton)
-        button.alpha = 0.2f
+        button.alpha = 0.3f
         enableDragAndSnap(button, params)
 
         startForegroundService()
@@ -166,12 +163,12 @@ class FlashlightButtonService : Service() {
     // Foreground Service
     // -----------------------------
     private fun startForegroundService() {
-        val channelId = "FloatingButtonChannel"
+        val channelId = "FloatingToolsChannel"
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 channelId,
-                "Floating Mute Button Service",
+                "Floating Tools Service",
                 NotificationManager.IMPORTANCE_LOW
             )
             val manager = getSystemService(NotificationManager::class.java)
@@ -179,8 +176,8 @@ class FlashlightButtonService : Service() {
         }
 
         val notification = NotificationCompat.Builder(this, channelId)
-            .setContentTitle("Flashlight Button Running")
-            .setSmallIcon(R.drawable.ic_flashlight)
+            .setContentTitle("Floating Tools Running")
+            .setSmallIcon(R.drawable.ic_settings)
             .build()
 
         startForeground(1, notification)

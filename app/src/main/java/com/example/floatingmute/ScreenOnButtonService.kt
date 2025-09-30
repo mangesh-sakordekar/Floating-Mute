@@ -1,7 +1,6 @@
 package com.example.floatingtools
 
 import android.app.*
-import android.content.Context
 import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.Build
@@ -39,7 +38,7 @@ class ScreenOnButtonService : Service() {
 
         params.gravity = Gravity.TOP or Gravity.START
         params.x = dpToPx(0)
-        params.y = dpToPx(200)
+        params.y = dpToPx(160)
 
         modeIcon = floatingView.findViewById(R.id.screenOnButton)
         modeIcon.alpha = 0.3f
@@ -144,12 +143,12 @@ class ScreenOnButtonService : Service() {
     // Foreground Service
     // -----------------------------------
     private fun startForegroundService() {
-        val channelId = "ScreenOnButtonChannel"
+        val channelId = "FloatingToolsChannel"
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 channelId,
-                "Floating Screen On Service",
+                "Floating Tools Service",
                 NotificationManager.IMPORTANCE_LOW
             )
             val manager = getSystemService(NotificationManager::class.java)
@@ -157,8 +156,8 @@ class ScreenOnButtonService : Service() {
         }
 
         val notification = NotificationCompat.Builder(this, channelId)
-            .setContentTitle("Floating Screen On Button")
-            .setSmallIcon(R.drawable.ic_screen_on)
+            .setContentTitle("Floating Tools Running")
+            .setSmallIcon(R.drawable.ic_settings)
             .build()
 
         startForeground(2, notification)

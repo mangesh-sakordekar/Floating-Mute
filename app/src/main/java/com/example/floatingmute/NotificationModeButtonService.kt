@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.PixelFormat
 import android.media.AudioManager
 import android.os.Build
-import android.os.IBinder
 import android.view.*
 import android.widget.ImageView
 import androidx.core.app.NotificationCompat
@@ -41,7 +40,7 @@ class NotificationModeButtonService : Service() {
 
         params.gravity = Gravity.TOP or Gravity.START
         params.x = dpToPx(0)
-        params.y = dpToPx(200)
+        params.y = dpToPx(160)
 
         modeIcon = floatingView.findViewById(R.id.notificationButton)
         modeIcon.alpha = 0.3f
@@ -153,12 +152,12 @@ class NotificationModeButtonService : Service() {
     // Foreground Service
     // -----------------------------------
     private fun startForegroundService() {
-        val channelId = "FloatingButtonChannel"
+        val channelId = "FloatingToolsChannel"
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 channelId,
-                "Floating Notification Mode Service",
+                "Floating Tools Service",
                 NotificationManager.IMPORTANCE_LOW
             )
             val manager = getSystemService(NotificationManager::class.java)
@@ -166,8 +165,8 @@ class NotificationModeButtonService : Service() {
         }
 
         val notification = NotificationCompat.Builder(this, channelId)
-            .setContentTitle("Floating Notification Mode Button")
-            .setSmallIcon(R.drawable.ic_ring)
+            .setContentTitle("Floating Tools Running")
+            .setSmallIcon(R.drawable.ic_settings)
             .build()
 
         startForeground(2, notification)

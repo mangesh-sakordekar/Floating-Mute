@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dp"
+    android:gravity="center">
+
+    <!-- Hours -->
+    <NumberPicker
+        android:id="@+id/hoursPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="130dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="h"
+        android:padding="4dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"/>
+
+    <!-- Minutes -->
+    <NumberPicker
+        android:id="@+id/minutesPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="130dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="m"
+        android:padding="4dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"/>
+
+    <!-- Seconds -->
+    <NumberPicker
+        android:id="@+id/secondsPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="130dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="s"
+        android:padding="4dp"
+        android:textSize="20sp"
+        android:textColor="@color/black"/>
+
+    <!-- Inline Set button -->
+    <ImageButton
+        android:id="@+id/setButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/row_background"
+        android:contentDescription="Screen On Button"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_start"
+        android:padding="7dp" />
+
+</LinearLayout>

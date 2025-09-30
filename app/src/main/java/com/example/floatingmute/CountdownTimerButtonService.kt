@@ -1,35 +1,44 @@
 package com.example.floatingtools
 
 import android.app.*
+import android.content.Context
 import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.Build
 import android.os.IBinder
 import android.view.*
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import android.app.Service
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.*
+import android.widget.EditText
+import android.widget.NumberPicker
+import android.view.GestureDetector
 
-
-class StopwatchButtonService : Service() {
+class CountdownTimerButtonService : Service() {
 
     private lateinit var windowManager: WindowManager
     private lateinit var floatingView: View
-    private lateinit var stopwatchText: TextView
+    private lateinit var timerText: TextView
+    private lateinit var settingsButton: ImageButton
 
     private var isRunning = false
-    private var startTime = 0L
-    private var elapsedTime = 0L
-    private val handler = Handler(Looper.getMainLooper())
-    private var timerRunnable: Runnable? = null
+
+    private var resetTimeMillis: Long = 60 * 1000
+    private var remainingTimeMillis: Long = 60 * 1000 // default 1 minutes
+    private var countDownTimer: CountDownTimer? = null
+
+    private lateinit var gestureDetector: GestureDetector
 
     override fun onCreate() {
         super.onCreate()
 
 
         // Inflate floating button layout
-        floatingView = LayoutInflater.from(this).inflate(R.layout.floating_stopwatch_button, null)
+        floatingView = LayoutInflater.from(this).inflate(R.layout.floating_countdown_timer, null)
 
         val layoutType = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
@@ -49,14 +58,22 @@ class StopwatchButtonService : Service() {
         params.x = dpToPx(0)
         params.y = dpToPx(160)
 
-        stopwatchText = floatingView.findViewById(R.id.stopwatchTime)
+        timerText = floatingView.findViewById(R.id.timerText)
+        settingsButton = floatingView.findViewById(R.id.settingsButton)
         floatingView.alpha = 0.3f
+
+        settingsButton.setOnClickListener {
+            showDurationDialog()
+            true
+        }
+
+
 
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
         windowManager.addView(floatingView, params)
 
 
-        enableDragAndSnap(stopwatchText, params)
+        enableDragAndSnap(floatingView, params)
 
         startForegroundService()
     }
@@ -67,34 +84,117 @@ class StopwatchButtonService : Service() {
     private fun toggleStopwatch() {
         if (isRunning) {
             // Stop
-            handler.removeCallbacks(timerRunnable!!)
-            elapsedTime += SystemClock.elapsedRealtime() - startTime
+            countDownTimer?.cancel()
             isRunning = false
         } else {
             // Start
-            startTime = SystemClock.elapsedRealtime()
-            timerRunnable = object : Runnable {
-                override fun run() {
-                    val total = elapsedTime + (SystemClock.elapsedRealtime() - startTime)
-                    val minutes = (total / 1000) / 60
-                    val seconds = (total / 1000) % 60
-                    val millis = (total % 1000) // show 2-digit centiseconds
-
-                    stopwatchText.text = String.format("%02d:%02d.%03d", minutes, seconds, millis)
-
-                    handler.postDelayed(this, 50) // update every 50ms for smooth display
+            countDownTimer?.cancel()
+            countDownTimer = object : CountDownTimer(remainingTimeMillis, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    remainingTimeMillis = millisUntilFinished
+                    updateTimerText()
                 }
-            }
-            handler.post(timerRunnable!!)
+
+                override fun onFinish() {
+                    remainingTimeMillis = 0
+                    updateTimerText()
+                    isRunning = false // play icon
+                    showFinishNotification()
+                }
+            }.start()
+
             isRunning = true
         }
     }
 
     private fun resetStopwatch() {
-        handler.removeCallbacks(timerRunnable!!)
+        countDownTimer?.cancel()
         isRunning = false
-        elapsedTime = 0L
-        stopwatchText.text = "00:00.000"
+        remainingTimeMillis = resetTimeMillis
+        updateTimerText()
+    }
+
+    private fun updateTimerText() {
+        val hours = (remainingTimeMillis / 1000) / 3600
+        val minutes = ((remainingTimeMillis / 1000) % 3600) / 60
+        val seconds = (remainingTimeMillis / 1000) % 60
+        timerText.text = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+    }
+
+    private fun setNumberPickerTextStyle(numberPicker: NumberPicker) {
+        val count = numberPicker.childCount
+
+        for (i in 0 until count) {
+            val child = numberPicker.getChildAt(i)
+            if (child is EditText) {
+                child.setTextColor(Color.BLACK)
+                child.textSize = 26f   // Make numbers larger
+                child.typeface = Typeface.DEFAULT_BOLD
+                child.isEnabled = false
+            }
+        }
+        numberPicker.invalidate()
+    }
+
+
+
+
+    private fun showDurationDialog() {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_timer_picker, null)
+        val hoursPicker = dialogView.findViewById<NumberPicker>(R.id.hoursPicker)
+        val minutesPicker = dialogView.findViewById<NumberPicker>(R.id.minutesPicker)
+        val secondsPicker = dialogView.findViewById<NumberPicker>(R.id.secondsPicker)
+        val setButton = dialogView.findViewById<ImageButton>(R.id.setButton)
+
+        hoursPicker.minValue = 0
+        hoursPicker.maxValue = 23
+        minutesPicker.minValue = 0
+        minutesPicker.maxValue = 59
+        secondsPicker.minValue = 0
+        secondsPicker.maxValue = 59
+        minutesPicker.value = 1
+
+        setNumberPickerTextStyle(hoursPicker)
+        setNumberPickerTextStyle(minutesPicker)
+        setNumberPickerTextStyle(secondsPicker)
+
+        val dialog = AlertDialog.Builder(this, android.R.style.Theme_Material_Light_Dialog_NoActionBar)
+            .setView(dialogView)
+            .create()
+
+        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_background)
+        dialog.window?.setType(
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+            else
+                WindowManager.LayoutParams.TYPE_PHONE
+        )
+
+        // Handle inline Set button click
+        setButton.setOnClickListener {
+            val hours = hoursPicker.value
+            val minutes = minutesPicker.value
+            val seconds = secondsPicker.value
+            remainingTimeMillis = ((hours * 3600) + (minutes * 60) + seconds) * 1000L
+            resetTimeMillis = remainingTimeMillis
+            resetStopwatch()
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+
+    private fun showFinishNotification() {
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notification = NotificationCompat.Builder(this, "FloatingToolsChannel")
+            .setContentTitle("Countdown Finished")
+            .setContentText("Your timer is up!")
+            .setSmallIcon(R.drawable.ic_stop)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .build()
+        notificationManager.notify(1002, notification)
     }
 
     // -----------------------------
