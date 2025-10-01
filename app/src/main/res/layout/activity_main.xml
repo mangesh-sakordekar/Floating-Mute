@@ -78,6 +78,18 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:background="@drawable/row_red_background"/>
+
+            <TextView
+                android:id="@+id/cameraPermissionText"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Camera"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:padding="10dp"
+                android:background="@drawable/row_red_background"/>
         </LinearLayout>
 
 
@@ -425,6 +437,56 @@
                     android:layout_marginStart="8dp"
                     android:padding="12dp"/>
             </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!-- Mirror Button -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="12dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/row_background">
+
+                <TextView
+                    android:id="@+id/mirrorText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:text="Mirror"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:gravity="center_vertical" />
+
+
+                <ImageButton
+                    android:id="@+id/stopMirrorButton"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/btn_stop_background"
+                    android:src="@drawable/ic_stop"
+                    android:contentDescription="@string/stop"
+                    android:scaleType="centerInside"
+                    app:tint="@android:color/white"
+                    android:layout_marginStart="8dp"
+                    android:padding="12dp"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
         </LinearLayout>
 
         <!-- Section 3: Media -->

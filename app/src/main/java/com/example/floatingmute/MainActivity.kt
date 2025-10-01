@@ -1,20 +1,25 @@
 package com.example.floatingtools
 
+import android.Manifest
 import android.app.Activity
 import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.media.projection.MediaProjectionManager
+import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import android.media.projection.MediaProjectionManager
-import android.content.Context
-import android.net.Uri
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +27,9 @@ class MainActivity : AppCompatActivity() {
     private val OVERLAY_REQUEST_CODE = 1002
     private val WRITE_REQUEST_CODE = 1003
     private val DND_REQUEST_CODE = 1004
+
+    private val CAMERA_PERMISSION_REQUEST = 2001
+
     private var _bannerAd: AdView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         val overlayPermissionButton = findViewById<TextView>(R.id.overlayPermissionText)
         val writePermissionButton = findViewById<TextView>(R.id.writePermissionText)
         val dndPermissionButton = findViewById<TextView>(R.id.dndPermissionText)
+        val cameraPermissionButton = findViewById<TextView>(R.id.cameraPermissionText)
 
 
         val startMuteButton = findViewById<TextView>(R.id.muteText)
@@ -60,12 +69,16 @@ class MainActivity : AppCompatActivity() {
         val startTimerButton = findViewById<TextView>(R.id.countdownTimerText)
         val stopTimerButton = findViewById<ImageButton>(R.id.stopTimerButton)
 
+        val startMirrorButton = findViewById<TextView>(R.id.mirrorText)
+        val stopMirrorButton = findViewById<ImageButton>(R.id.stopMirrorButton)
+
         MobileAds.initialize(this@MainActivity)
         loadBannerAd()
 
         updateOverlayBackground()
         updateWriteBackground()
         updateDNDBackground()
+        updateCameraBackground()
 
         overlayPermissionButton.setOnClickListener {
             if (Settings.canDrawOverlays(this)) {
@@ -83,6 +96,17 @@ class MainActivity : AppCompatActivity() {
             else{
                 Toast.makeText(this, "Write Settings permission required", Toast.LENGTH_SHORT).show()
                 checkAndRequestWriteSettings()
+            }
+        }
+
+        cameraPermissionButton.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Camera permission already granted", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                Toast.makeText(this, "Camera permission required", Toast.LENGTH_SHORT).show()
+                requestCameraPermission()
             }
         }
 
@@ -257,6 +281,28 @@ class MainActivity : AppCompatActivity() {
         stopTimerButton.setOnClickListener {
             stopService(Intent(this, CountdownTimerButtonService::class.java))
         }
+
+        // Start Mirror Button Service
+        startMirrorButton.setOnClickListener {
+            if (Settings.canDrawOverlays(this)) {
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                            == PackageManager.PERMISSION_GRANTED) {
+                    startService(Intent(this, MirrorFloatingService::class.java))
+                }
+                else{
+                    Toast.makeText(this, "Camera permission required", Toast.LENGTH_SHORT).show()
+                    requestCameraPermission()
+                }
+            } else {
+                Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
+                requestOverlayPermission()
+            }
+        }
+
+        // Stop Mirror Button Service
+        stopMirrorButton.setOnClickListener {
+            stopService(Intent(this, MirrorFloatingService::class.java))
+        }
     }
 
     override fun onResume() {
@@ -299,6 +345,30 @@ class MainActivity : AppCompatActivity() {
             android.net.Uri.parse("package:$packageName")
         )
         startActivityForResult(intent, 1002)
+    }
+
+    private fun requestCameraPermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.CAMERA),
+            CAMERA_PERMISSION_REQUEST
+        )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == CAMERA_PERMISSION_REQUEST) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted → start service
+                updateCameraBackground()
+            } else {
+                Toast.makeText(this, "Camera permission is required for mirror", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun checkAndRequestWriteSettings() {
@@ -351,6 +421,17 @@ class MainActivity : AppCompatActivity() {
         }
         else{
             dndPermissionButton.setBackgroundResource(R.drawable.row_red_background)
+        }
+    }
+
+    private fun updateCameraBackground(){
+        val cameraPermissionButton = findViewById<TextView>(R.id.cameraPermissionText)
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+            == PackageManager.PERMISSION_GRANTED){
+            cameraPermissionButton.setBackgroundResource(R.drawable.row_green_background)
+        }
+        else{
+            cameraPermissionButton.setBackgroundResource(R.drawable.row_red_background)
         }
     }
 }
