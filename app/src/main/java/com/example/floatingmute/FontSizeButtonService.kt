@@ -182,6 +182,9 @@ class FontSizeButtonService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
+        if(isZoomed){
+            toggleFontSize()
+        }
         floatingView?.let { windowManager.removeView(it) }
     }
 

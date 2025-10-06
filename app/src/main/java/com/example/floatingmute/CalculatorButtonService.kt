@@ -157,6 +157,9 @@ class CalculatorButtonService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
+        if(isOn){
+            toggle()
+        }
         floatingView?.let { windowManager.removeView(it) }
     }
 
