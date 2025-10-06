@@ -120,6 +120,12 @@ xmlns:tools="http://schemas.android.com/tools">
             android:foregroundServiceType="mediaProjection"
             tools:ignore="ForegroundServicePermission" />
 
+        <service
+            android:name=".FontSizeButtonService"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection"
+            tools:ignore="ForegroundServicePermission" />
+
 
     </application>
 

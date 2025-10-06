@@ -75,6 +75,9 @@ class MainActivity : AppCompatActivity() {
         val startCalculatorButton = findViewById<TextView>(R.id.calculatorText)
         val stopCalculatorButton = findViewById<ImageButton>(R.id.stopCalculatorButton)
 
+        val startFontSizeButton = findViewById<TextView>(R.id.fontSizeText)
+        val stopFontSizeButton = findViewById<ImageButton>(R.id.stopFontSizeButton)
+
         MobileAds.initialize(this@MainActivity)
         loadBannerAd()
 
@@ -345,6 +348,29 @@ class MainActivity : AppCompatActivity() {
         // Stop Mute Button Service
         stopCalculatorButton.setOnClickListener {
             stopService(Intent(this, CalculatorButtonService::class.java))
+            loadBannerAd()
+        }
+
+        // Start Font Size Button Service
+        startFontSizeButton.setOnClickListener {
+            if (Settings.canDrawOverlays(this)) {
+                if (Settings.System.canWrite(this)) {
+                    startService(Intent(this, FontSizeButtonService::class.java))
+                }
+                else{
+                    Toast.makeText(this, "Write Settings permission required", Toast.LENGTH_SHORT).show()
+                    checkAndRequestWriteSettings()
+                }
+            } else {
+                Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
+                requestOverlayPermission()
+            }
+            loadBannerAd()
+        }
+
+        // Stop FontSize Button Service
+        stopFontSizeButton.setOnClickListener {
+            stopService(Intent(this, FontSizeButtonService::class.java))
             loadBannerAd()
         }
     }
