@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/calculatorContainer"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingTop="20dp"
+    android:paddingHorizontal="8dp"
+    android:background="@drawable/floating_calculator_bg"
+    android:elevation="10dp">
+
+    <!-- Close button top-right
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/closeButton"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="end"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:background="@android:color/transparent"
+            app:tint="#FFFFFF" />
+    </FrameLayout> -->
+
+    <!-- Display + Controls Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="4dp">
+
+        <TextView
+            android:id="@+id/display"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:padding="6dp"
+            android:gravity="end|center_vertical"
+            android:text="0"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:background="#33FFFFFF"
+            android:textColor="#FFFFFF"
+            android:layout_marginRight="4dp"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/btn_clear"
+            android:text="C"
+            android:layout_width="44dp"
+            android:layout_height="40dp"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/btn_glass" />
+
+        <Button
+            android:id="@+id/btn_back"
+            android:text="⌫"
+            android:layout_width="44dp"
+            android:layout_height="40dp"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/btn_glass"
+            android:layout_marginLeft="4dp"/>
+    </LinearLayout>
+
+    <!-- Buttons grid -->
+    <GridLayout
+        android:id="@+id/grid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:rowCount="5"
+        android:alignmentMode="alignMargins"
+        android:useDefaultMargins="true">
+
+        <Button android:id="@+id/btn_7" android:text="7" style="@style/CalcButton"/>
+        <Button android:id="@+id/btn_8" android:text="8" style="@style/CalcButton"/>
+        <Button android:id="@+id/btn_9" android:text="9" style="@style/CalcButton"/>
+        <Button android:id="@+id/btn_div" android:text="/" style="@style/CalcButton"/>
+
+        <Button android:id="@+id/btn_4" android:text="4" style="@style/CalcButton"/>
+        <Button android:id="@+id/btn_5" android:text="5" style="@style/CalcButton"/>
+        <Button android:id="@+id/btn_6" android:text="6" style="@style/CalcButton"/>
+        <Button android:id="@+id/btn_mul" android:text="×" style="@style/CalcButton"/>
+
+        <Button android:id="@+id/btn_1" android:text="1" style="@style/CalcButton"/>
+        <Button android:id="@+id/btn_2" android:text="2" style="@style/CalcButton"/>
+        <Button android:id="@+id/btn_3" android:text="3" style="@style/CalcButton"/>
+        <Button android:id="@+id/btn_sub" android:text="−" style="@style/CalcButton"/>
+
+        <Button android:id="@+id/btn_dot" android:text="." style="@style/CalcButton"/>
+        <Button android:id="@+id/btn_0" android:text="0" style="@style/CalcButton"/>
+        <Button android:id="@+id/btn_eq" android:text="=" style="@style/CalcButton"/>
+        <Button android:id="@+id/btn_add" android:text="+" style="@style/CalcButton"/>
+    </GridLayout>
+</LinearLayout>

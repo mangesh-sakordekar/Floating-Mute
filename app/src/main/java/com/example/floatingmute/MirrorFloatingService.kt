@@ -3,16 +3,19 @@ package com.example.floatingtools
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.graphics.Matrix
 import android.graphics.PixelFormat
+import android.graphics.SurfaceTexture
 import android.hardware.camera2.*
+import android.hardware.display.DisplayManager
 import android.os.Build
 import android.os.IBinder
 import android.view.*
 import android.widget.ImageButton
 import androidx.core.app.NotificationCompat
-import android.graphics.SurfaceTexture
 import android.os.Handler
 import android.os.HandlerThread
+import android.os.Looper
 import android.widget.FrameLayout
 
 class MirrorFloatingService : Service() {
@@ -26,9 +29,7 @@ class MirrorFloatingService : Service() {
     private var cameraCaptureSession: CameraCaptureSession? = null
     private var backgroundHandler: Handler? = null
     private var backgroundThread: HandlerThread? = null
-
-    private var params: WindowManager.LayoutParams? = null
-    private var currentRotation: Int = 0
+    private var currentCameraId: String? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -50,7 +51,7 @@ class MirrorFloatingService : Service() {
             WindowManager.LayoutParams.TYPE_PHONE
         }
 
-        params = WindowManager.LayoutParams(
+        val params = WindowManager.LayoutParams(
             320,
             400,
             layoutType,
@@ -65,7 +66,7 @@ class MirrorFloatingService : Service() {
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
         windowManager.addView(floatingView, params)
 
-        enableDrag(floatingView, params!!)
+        enableDrag(floatingView, params)
 
         closeButton.setOnClickListener {
             stopSelf()
@@ -73,10 +74,11 @@ class MirrorFloatingService : Service() {
 
         textureView.surfaceTextureListener = surfaceTextureListener
 
-        // Save current rotation
-        currentRotation = windowManager.defaultDisplay.rotation
-
         startForegroundService()
+
+        // Listen for rotation changes
+        val displayManager = getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
+        displayManager.registerDisplayListener(displayListener, null)
     }
 
     // -----------------------------
@@ -88,7 +90,7 @@ class MirrorFloatingService : Service() {
         }
 
         override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture, width: Int, height: Int) {
-            restartPreview()
+            configureTransform(width, height)
         }
 
         override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean = true
@@ -102,6 +104,7 @@ class MirrorFloatingService : Service() {
                 val characteristics = cameraManager.getCameraCharacteristics(cameraId)
                 val facing = characteristics.get(CameraCharacteristics.LENS_FACING)
                 if (facing != null && facing == CameraCharacteristics.LENS_FACING_FRONT) {
+                    currentCameraId = cameraId
                     startBackgroundThread()
                     if (checkSelfPermission(android.Manifest.permission.CAMERA) ==
                         android.content.pm.PackageManager.PERMISSION_GRANTED) {
@@ -132,8 +135,6 @@ class MirrorFloatingService : Service() {
 
     private fun startCameraPreview() {
         val texture = textureView.surfaceTexture ?: return
-
-        // Adapt preview size to texture view
         texture.setDefaultBufferSize(textureView.width, textureView.height)
         val surface = Surface(texture)
 
@@ -156,6 +157,7 @@ class MirrorFloatingService : Service() {
                             null,
                             backgroundHandler
                         )
+                        configureTransform(textureView.width, textureView.height)
                     }
 
                     override fun onConfigureFailed(session: CameraCaptureSession) {}
@@ -167,10 +169,31 @@ class MirrorFloatingService : Service() {
         }
     }
 
-    private fun restartPreview() {
-        cameraCaptureSession?.close()
-        cameraDevice?.let {
-            startCameraPreview()
+    // Apply rotation matrix
+    private fun configureTransform(viewWidth: Int, viewHeight: Int) {
+        Handler(Looper.getMainLooper()).post {
+            val rotation = windowManager.defaultDisplay.rotation
+            val matrix = Matrix()
+            val centerX = viewWidth / 2f
+            val centerY = viewHeight / 2f
+
+            when (rotation) {
+                Surface.ROTATION_0 -> matrix.postRotate(0f, centerX, centerY)
+                Surface.ROTATION_90 -> matrix.postRotate(270f, centerX, centerY)
+                Surface.ROTATION_180 -> matrix.postRotate(180f, centerX, centerY)
+                Surface.ROTATION_270 -> matrix.postRotate(90f, centerX, centerY)
+            }
+            textureView.setTransform(matrix)
+        }
+    }
+
+    private val displayListener = object : DisplayManager.DisplayListener {
+        override fun onDisplayAdded(displayId: Int) {}
+        override fun onDisplayRemoved(displayId: Int) {}
+        override fun onDisplayChanged(displayId: Int) {
+            if (textureView.isAvailable) {
+                configureTransform(textureView.width, textureView.height)
+            }
         }
     }
 
@@ -190,6 +213,9 @@ class MirrorFloatingService : Service() {
         windowManager.removeView(floatingView)
         cameraDevice?.close()
         stopBackgroundThread()
+
+        val displayManager = getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
+        displayManager.unregisterDisplayListener(displayListener)
     }
 
     override fun onBind(intent: Intent?): IBinder? = null

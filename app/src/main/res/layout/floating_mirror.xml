@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dialog_background"
+    android:background="@drawable/floating_calculator_bg"
     android:padding="2dp"
     android:id="@+id/mirrorContainer"
     >
@@ -11,7 +11,8 @@
     <TextureView
         android:id="@+id/cameraPreview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
 
     <ImageButton
         android:id="@+id/closeButton"

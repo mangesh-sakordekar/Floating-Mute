@@ -72,6 +72,9 @@ class MainActivity : AppCompatActivity() {
         val startMirrorButton = findViewById<TextView>(R.id.mirrorText)
         val stopMirrorButton = findViewById<ImageButton>(R.id.stopMirrorButton)
 
+        val startCalculatorButton = findViewById<TextView>(R.id.calculatorText)
+        val stopCalculatorButton = findViewById<ImageButton>(R.id.stopCalculatorButton)
+
         MobileAds.initialize(this@MainActivity)
         loadBannerAd()
 
@@ -87,6 +90,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
                 requestOverlayPermission()
             }
+            loadBannerAd()
         }
 
         writePermissionButton.setOnClickListener {
@@ -97,6 +101,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Write Settings permission required", Toast.LENGTH_SHORT).show()
                 checkAndRequestWriteSettings()
             }
+            loadBannerAd()
         }
 
         cameraPermissionButton.setOnClickListener {
@@ -108,6 +113,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Camera permission required", Toast.LENGTH_SHORT).show()
                 requestCameraPermission()
             }
+            loadBannerAd()
         }
 
         dndPermissionButton.setOnClickListener {
@@ -119,6 +125,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Notification Policy permission required", Toast.LENGTH_SHORT).show()
                 changeDoNotDisturbState()
             }
+            loadBannerAd()
         }
 
         // Start Mute Button Service
@@ -129,11 +136,13 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
                 requestOverlayPermission()
             }
+            loadBannerAd()
         }
 
         // Stop Mute Button Service
         stopMuteButton.setOnClickListener {
             stopService(Intent(this, FloatingButtonService::class.java))
+            loadBannerAd()
         }
 
         // Start Brightness Button Service
@@ -150,11 +159,13 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
                 requestOverlayPermission()
             }
+            loadBannerAd()
         }
 
         // Stop Brightness Button Service
         stopBrightnessButton.setOnClickListener {
             stopService(Intent(this, BrightnessButtonService::class.java))
+            loadBannerAd()
         }
 
         // Start Screenshot Button Service
@@ -171,11 +182,13 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
                 requestOverlayPermission()
             }
+            loadBannerAd()
         }
 
         // Stop Screenshot Button Service
         stopScreenshotButton.setOnClickListener {
             stopService(Intent(this, ScreenshotButtonService::class.java))
+            loadBannerAd()
         }
 
         // Start Mute Button Service
@@ -186,11 +199,13 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
                 requestOverlayPermission()
             }
+            loadBannerAd()
         }
 
         // Stop Mute Button Service
         stopFlashlightButton.setOnClickListener {
             stopService(Intent(this, FlashlightButtonService::class.java))
+            loadBannerAd()
         }
 
         // Start Mute Button Service
@@ -201,11 +216,13 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
                 requestOverlayPermission()
             }
+            loadBannerAd()
         }
 
         // Stop Mute Button Service
         stopStopwatchButton.setOnClickListener {
             stopService(Intent(this, StopwatchButtonService::class.java))
+            loadBannerAd()
         }
 
         // Start Notification Button Service
@@ -223,11 +240,13 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
                 requestOverlayPermission()
             }
+            loadBannerAd()
         }
 
         // Stop Mute Button Service
         stopNotificationButton.setOnClickListener {
             stopService(Intent(this, NotificationModeButtonService::class.java))
+            loadBannerAd()
         }
 
         // Start Notification Button Service
@@ -245,11 +264,13 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
                 requestOverlayPermission()
             }
+            loadBannerAd()
         }
 
         // Stop Mute Button Service
         stopDNDButton.setOnClickListener {
             stopService(Intent(this, DNDButtonService::class.java))
+            loadBannerAd()
         }
 
         // Start Screen On Button Service
@@ -260,11 +281,13 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
                 requestOverlayPermission()
             }
+            loadBannerAd()
         }
 
         // Stop Screen On Button Service
         stopScreenOnButton.setOnClickListener {
             stopService(Intent(this, ScreenOnButtonService::class.java))
+            loadBannerAd()
         }
 
         // Start Mute Button Service
@@ -275,11 +298,13 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
                 requestOverlayPermission()
             }
+            loadBannerAd()
         }
 
         // Stop Mute Button Service
         stopTimerButton.setOnClickListener {
             stopService(Intent(this, CountdownTimerButtonService::class.java))
+            loadBannerAd()
         }
 
         // Start Mirror Button Service
@@ -297,11 +322,30 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
                 requestOverlayPermission()
             }
+            loadBannerAd()
         }
 
         // Stop Mirror Button Service
         stopMirrorButton.setOnClickListener {
             stopService(Intent(this, MirrorFloatingService::class.java))
+            loadBannerAd()
+        }
+
+        // Start Calculator Button Service
+        startCalculatorButton.setOnClickListener {
+            if (Settings.canDrawOverlays(this)) {
+                startService(Intent(this, CalculatorButtonService::class.java))
+            } else {
+                Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
+                requestOverlayPermission()
+            }
+            loadBannerAd()
+        }
+
+        // Stop Mute Button Service
+        stopCalculatorButton.setOnClickListener {
+            stopService(Intent(this, CalculatorButtonService::class.java))
+            loadBannerAd()
         }
     }
 
@@ -310,6 +354,7 @@ class MainActivity : AppCompatActivity() {
         updateOverlayBackground()
         updateWriteBackground()
         updateDNDBackground()
+        updateCameraBackground()
     }
 
 

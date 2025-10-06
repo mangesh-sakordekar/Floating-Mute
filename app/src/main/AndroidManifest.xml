@@ -108,6 +108,18 @@ xmlns:tools="http://schemas.android.com/tools">
             android:foregroundServiceType="mediaProjection"
             tools:ignore="ForegroundServicePermission" />
 
+        <service
+            android:name=".CalculatorFloatingService"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection"
+            tools:ignore="ForegroundServicePermission" />
+
+        <service
+            android:name=".CalculatorButtonService"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection"
+            tools:ignore="ForegroundServicePermission" />
+
 
     </application>
 
