@@ -126,6 +126,19 @@ xmlns:tools="http://schemas.android.com/tools">
             android:foregroundServiceType="mediaProjection"
             tools:ignore="ForegroundServicePermission" />
 
+        <service
+            android:name=".FloatingNotesService"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection"
+            tools:ignore="ForegroundServicePermission" />
+
+        <service
+            android:name=".NotepadButtonService"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection"
+            tools:ignore="ForegroundServicePermission" />
+
+
 
     </application>
 

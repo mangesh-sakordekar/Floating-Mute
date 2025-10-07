@@ -4,6 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.PixelFormat
 import android.os.Build
 import android.os.IBinder
@@ -21,6 +22,8 @@ class CalculatorFloatingService : Service() {
     private lateinit var floatingView: View
     private lateinit var display: TextView
 
+    private lateinit var prefs: SharedPreferences
+
     // calculator state
     private var currentInput = ""
     private var currentOperator: Char? = null
@@ -29,6 +32,7 @@ class CalculatorFloatingService : Service() {
     override fun onCreate() {
         super.onCreate()
 
+        prefs = getSharedPreferences("floating_notes", Context.MODE_PRIVATE)
         floatingView = LayoutInflater.from(this).inflate(R.layout.floating_calculator, null)
         display = floatingView.findViewById(R.id.display)
         //val closeButton = floatingView.findViewById<ImageButton>(R.id.closeButton)
@@ -57,10 +61,9 @@ class CalculatorFloatingService : Service() {
         windowManager.addView(floatingView, params)
 
         enableDrag(floatingView, params)
-        /*
-        closeButton.setOnClickListener {
-            stopSelf()
-        }*/
+
+
+        display.setText(prefs.getString("calc_text", "0"))
 
         // Wire numeric buttons
         val numIds = listOf(
@@ -180,6 +183,7 @@ class CalculatorFloatingService : Service() {
         Handler(Looper.getMainLooper()).post {
             display.text = text
         }
+        prefs.edit().putString("calc_text", text).apply()
     }
 
     private fun enableDrag(view: View, params: WindowManager.LayoutParams) {

@@ -78,6 +78,9 @@ class MainActivity : AppCompatActivity() {
         val startFontSizeButton = findViewById<TextView>(R.id.fontSizeText)
         val stopFontSizeButton = findViewById<ImageButton>(R.id.stopFontSizeButton)
 
+        val startNotepadButton = findViewById<TextView>(R.id.notepadText)
+        val stopNotepadButton = findViewById<ImageButton>(R.id.stopNotepadButton)
+
         MobileAds.initialize(this@MainActivity)
         loadBannerAd()
 
@@ -371,6 +374,23 @@ class MainActivity : AppCompatActivity() {
         // Stop FontSize Button Service
         stopFontSizeButton.setOnClickListener {
             stopService(Intent(this, FontSizeButtonService::class.java))
+            loadBannerAd()
+        }
+
+        // Start Notes Button Service
+        startNotepadButton.setOnClickListener {
+            if (Settings.canDrawOverlays(this)) {
+                startService(Intent(this, NotepadButtonService::class.java))
+            } else {
+                Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
+                requestOverlayPermission()
+            }
+            loadBannerAd()
+        }
+
+        // Stop Notes Button Service
+        stopNotepadButton.setOnClickListener {
+            stopService(Intent(this, NotepadButtonService::class.java))
             loadBannerAd()
         }
     }

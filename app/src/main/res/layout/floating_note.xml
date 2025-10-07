@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/noteContainer"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@drawable/floating_calculator_bg"
+    android:elevation="10dp"
+    android:gravity="center_vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="Notepad"
+            android:textSize="20dp"
+            android:textColor="@android:color/white"
+            android:layout_marginHorizontal="5dp" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/eraseButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_erase"
+            android:scaleType="fitCenter"
+            android:contentDescription="Save Note"
+            app:tint="@android:color/white"
+            android:padding="5dp"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/doneButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_check"
+            android:scaleType="fitCenter"
+            android:contentDescription="Save Note"
+            app:tint="@android:color/white"
+            android:padding="5dp"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/noteEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|start"
+        android:hint="Type your note..."
+        android:textColorHint="@color/white"
+        android:background="@android:color/transparent"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:inputType="textMultiLine|textCapSentences"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        android:padding="8dp"
+        android:minHeight="120dp"
+        android:maxLines="15"
+        android:layout_marginTop="4dp" />
+</LinearLayout>
