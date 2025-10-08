@@ -62,7 +62,10 @@ class NotificationModeButtonService : Service() {
             AudioManager.RINGER_MODE_NORMAL -> {
                 val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
                 audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
-                notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
+                if (notificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_ALL) {
+                    notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
+                }
+                //audioManager.setStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_MUTE, 0)
             }
             AudioManager.RINGER_MODE_VIBRATE -> {
                 audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL

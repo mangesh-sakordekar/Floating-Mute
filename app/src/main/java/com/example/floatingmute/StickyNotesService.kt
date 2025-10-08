@@ -15,11 +15,11 @@ import androidx.core.widget.doAfterTextChanged
 class StickyNotesService : Service() {
 
     private lateinit var windowManager: WindowManager
-    private var floatingView: View? = null
-    private lateinit var params: WindowManager.LayoutParams
     private lateinit var prefs: SharedPreferences
 
-    private var isActive = false
+    // ✅ Store multiple note instances
+    private val noteViews = mutableListOf<View>()
+    private val noteParams = mutableListOf<WindowManager.LayoutParams>()
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -27,12 +27,18 @@ class StickyNotesService : Service() {
         super.onCreate()
         prefs = getSharedPreferences("floating_notes", Context.MODE_PRIVATE)
         windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        showFloatingNote()
+        //createStickyNote()
     }
 
-    private fun showFloatingNote() {
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        // ✅ Create a new note each time the service is started
+        createStickyNote()
+        return START_NOT_STICKY
+    }
+
+    private fun createStickyNote() {
         val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        floatingView = inflater.inflate(R.layout.floating_sticky_note, null)
+        val floatingView = inflater.inflate(R.layout.floating_sticky_note, null)
 
         val layoutType =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
@@ -41,8 +47,8 @@ class StickyNotesService : Service() {
                 WindowManager.LayoutParams.TYPE_PHONE
 
         val screenWidth = resources.displayMetrics.widthPixels
-        params = WindowManager.LayoutParams(
-            screenWidth/2, //WindowManager.LayoutParams.WRAP_CONTENT,
+        val params = WindowManager.LayoutParams(
+            screenWidth / 2,
             WindowManager.LayoutParams.WRAP_CONTENT,
             layoutType,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
@@ -50,43 +56,47 @@ class StickyNotesService : Service() {
         )
 
         params.gravity = Gravity.TOP or Gravity.START
-        params.x = 200
-        params.y = 300
+        params.x = (100..400).random() // randomize placement for each note
+        params.y = (200..600).random()
 
-        val editText = floatingView!!.findViewById<EditText>(R.id.stickyNoteEditText)
-        val closeButton = floatingView!!.findViewById<ImageButton>(R.id.closeButton)
+        val editText = floatingView.findViewById<EditText>(R.id.stickyNoteEditText)
+        val closeButton = floatingView.findViewById<ImageButton>(R.id.closeButton)
 
+        var isActive = false
 
         // Make EditText focusable when clicked
         editText.setOnTouchListener { _, _ ->
             isActive = true
             closeButton.setImageResource(R.drawable.ic_check)
-            params.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+            params.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or
+                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
             windowManager.updateViewLayout(floatingView, params)
             false
         }
 
-
         // Close button
         closeButton.setOnClickListener {
-            if(isActive){
+            if (isActive) {
                 isActive = false
                 params.flags = params.flags or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                 windowManager.updateViewLayout(floatingView, params)
                 closeButton.setImageResource(R.drawable.ic_close)
-            }
-            else {
-                stopSelf()
+            } else {
+                windowManager.removeView(floatingView)
+                noteViews.remove(floatingView)
+                noteParams.remove(params)
+                if (noteViews.isEmpty()) stopSelf()
             }
         }
 
-        // Drag support
-        makeDraggable(floatingView!!)
-
+        makeDraggable(floatingView, params)
         windowManager.addView(floatingView, params)
+
+        noteViews.add(floatingView)
+        noteParams.add(params)
     }
 
-    private fun makeDraggable(view: View) {
+    private fun makeDraggable(view: View, params: WindowManager.LayoutParams) {
         view.setOnTouchListener(object : View.OnTouchListener {
             private var initialX = 0
             private var initialY = 0
@@ -105,7 +115,7 @@ class StickyNotesService : Service() {
                     MotionEvent.ACTION_MOVE -> {
                         params.x = initialX + (event.rawX - touchX).toInt()
                         params.y = initialY + (event.rawY - touchY).toInt()
-                        windowManager.updateViewLayout(floatingView, params)
+                        windowManager.updateViewLayout(view, params)
                         return true
                     }
                 }
@@ -116,9 +126,11 @@ class StickyNotesService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (floatingView != null) {
-            windowManager.removeView(floatingView)
-            floatingView = null
+        // ✅ Remove all notes on destroy
+        for (view in noteViews) {
+            windowManager.removeView(view)
         }
+        noteViews.clear()
+        noteParams.clear()
     }
 }
