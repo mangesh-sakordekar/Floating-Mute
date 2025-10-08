@@ -81,6 +81,9 @@ class MainActivity : AppCompatActivity() {
         val startNotepadButton = findViewById<TextView>(R.id.notepadText)
         val stopNotepadButton = findViewById<ImageButton>(R.id.stopNotepadButton)
 
+        val startStickyNotesButton = findViewById<TextView>(R.id.stickyNotesText)
+        val stopStickyNotesButton = findViewById<ImageButton>(R.id.stopStickyNotesButton)
+
         MobileAds.initialize(this@MainActivity)
         loadBannerAd()
 
@@ -391,6 +394,23 @@ class MainActivity : AppCompatActivity() {
         // Stop Notes Button Service
         stopNotepadButton.setOnClickListener {
             stopService(Intent(this, NotepadButtonService::class.java))
+            loadBannerAd()
+        }
+
+        // Start Notes Button Service
+        startStickyNotesButton.setOnClickListener {
+            if (Settings.canDrawOverlays(this)) {
+                startService(Intent(this, StickyNotesButtonService::class.java))
+            } else {
+                Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
+                requestOverlayPermission()
+            }
+            loadBannerAd()
+        }
+
+        // Stop Notes Button Service
+        stopStickyNotesButton.setOnClickListener {
+            stopService(Intent(this, StickyNotesButtonService::class.java))
             loadBannerAd()
         }
     }

@@ -138,6 +138,18 @@ xmlns:tools="http://schemas.android.com/tools">
             android:foregroundServiceType="mediaProjection"
             tools:ignore="ForegroundServicePermission" />
 
+        <service
+            android:name=".StickyNotesService"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection"
+            tools:ignore="ForegroundServicePermission" />
+
+        <service
+            android:name=".StickyNotesButtonService"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection"
+            tools:ignore="ForegroundServicePermission" />
+
 
 
     </application>

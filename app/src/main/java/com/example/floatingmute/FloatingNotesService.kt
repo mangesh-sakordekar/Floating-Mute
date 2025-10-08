@@ -60,6 +60,12 @@ class FloatingNotesService : Service() {
         editText.setText(prefs.getString("note_text", ""))
 
         editText.setOnTouchListener { _, _ ->
+            params.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+            windowManager.updateViewLayout(floatingView, params)
+            false
+        }
+        /*
+        editText.setOnTouchListener { _, _ ->
             if ((params.flags and WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE) != 0) {
                 params.flags = params.flags and WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE.inv()
                 windowManager.updateViewLayout(floatingView, params)
@@ -75,7 +81,7 @@ class FloatingNotesService : Service() {
                 params.flags = params.flags or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                 windowManager.updateViewLayout(floatingView, params)
             }
-        }
+        }*/
 
         editText.doAfterTextChanged {
             prefs.edit().putString("note_text", it.toString()).apply()
