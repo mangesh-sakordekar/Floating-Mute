@@ -1,18 +1,17 @@
 package com.example.floatingtools
 
-
 import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.PixelFormat
 import android.hardware.display.DisplayManager
+import android.hardware.display.VirtualDisplay
 import android.media.ImageReader
 import android.media.projection.MediaProjection
 import android.media.projection.MediaProjectionManager
-import android.os.Build
-import android.os.Environment
-import android.os.IBinder
+import android.os.*
+import android.util.Log
 import android.view.*
 import android.widget.ImageButton
 import android.widget.Toast
@@ -23,13 +22,16 @@ import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class ScreenshotButtonService : Service() {
 
     private lateinit var windowManager: WindowManager
     private var floatingView: View? = null
+
     private var mediaProjection: MediaProjection? = null
     private var imageReader: ImageReader? = null
+    private var virtualDisplay: VirtualDisplay? = null
+    private lateinit var mediaProjectionCallback: MediaProjection.Callback
+    private val mainHandler = Handler(Looper.getMainLooper())
 
     private var resultCode: Int = 0
     private var resultData: Intent? = null
@@ -43,7 +45,7 @@ class ScreenshotButtonService : Service() {
         val layoutType = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
         } else {
-            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+            WindowManager.LayoutParams.TYPE_PHONE
         }
 
         val params = WindowManager.LayoutParams(
@@ -84,10 +86,22 @@ class ScreenshotButtonService : Service() {
                 val projectionManager =
                     getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
                 mediaProjection = projectionManager.getMediaProjection(resultCode, resultData!!)
+                setupMediaProjectionCallback()
+                mediaProjection?.registerCallback(mediaProjectionCallback, mainHandler)
                 setupImageReader()
             }
         }
         return START_STICKY
+    }
+
+    private fun setupMediaProjectionCallback() {
+        mediaProjectionCallback = object : MediaProjection.Callback() {
+            override fun onStop() {
+                super.onStop()
+                Log.d("ScreenshotService", "MediaProjection stopped by user.")
+                stopProjection()
+            }
+        }
     }
 
     private fun setupImageReader() {
@@ -98,8 +112,8 @@ class ScreenshotButtonService : Service() {
 
         imageReader = ImageReader.newInstance(width, height, PixelFormat.RGBA_8888, 2)
 
-        mediaProjection?.createVirtualDisplay(
-            "screenshot",
+        virtualDisplay = mediaProjection?.createVirtualDisplay(
+            "ScreenshotVirtualDisplay",
             width,
             height,
             density,
@@ -133,7 +147,7 @@ class ScreenshotButtonService : Service() {
         val ftDir = File(picturesDir, "FloatingTools")
 
         if (!ftDir.exists()) {
-            ftDir.mkdirs() // create the folder if it doesn't exist
+            ftDir.mkdirs()
         }
 
         val file = File(ftDir, "Screenshot_$timeStamp.png")
@@ -142,9 +156,6 @@ class ScreenshotButtonService : Service() {
             FileOutputStream(file).use {
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
             }
-
-
-            // Notify MediaStore / Gallery
             val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
             intent.data = android.net.Uri.fromFile(file)
             sendBroadcast(intent)
@@ -155,7 +166,20 @@ class ScreenshotButtonService : Service() {
         }
     }
 
-    // ---------------- Drag + Snap ----------------
+    private fun stopProjection() {
+        mediaProjection?.unregisterCallback(mediaProjectionCallback)
+        mediaProjection?.stop()
+        mediaProjection = null
+
+        virtualDisplay?.release()
+        virtualDisplay = null
+
+        imageReader?.close()
+        imageReader = null
+
+        stopSelf()
+    }
+
     @Suppress("ClickableViewAccessibility")
     private fun enableDragAndSnap(button: View, params: WindowManager.LayoutParams) {
         val edgeMargin = dpToPx(0)
@@ -181,15 +205,11 @@ class ScreenshotButtonService : Service() {
                 MotionEvent.ACTION_MOVE -> {
                     val dx = (event.rawX - touchStartX).toInt()
                     val dy = (event.rawY - touchStartY).toInt()
-
                     params.x = startX + dx
                     params.y = startY + dy
-
-                    // Clamp vertically within screen
                     val maxY = screenHeight - v.height - edgeMargin
                     val minY = edgeMargin
                     params.y = params.y.coerceIn(minY, maxY)
-
                     windowManager.updateViewLayout(floatingView, params)
                     true
                 }
@@ -200,11 +220,9 @@ class ScreenshotButtonService : Service() {
                     if (kotlin.math.abs(totalDx) < clickThreshold && kotlin.math.abs(totalDy) < clickThreshold) {
                         v.performClick()
                     } else {
-                        if (params.y > screenHeight - 150){
+                        if (params.y > screenHeight - 150) {
                             stopSelf()
-                        }
-                        else {
-                            // Snap to nearest horizontal edge
+                        } else {
                             val middleX = params.x + v.width / 2
                             val snapLeft = edgeMargin
                             val snapRight = screenWidth - v.width - edgeMargin
@@ -243,12 +261,10 @@ class ScreenshotButtonService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         floatingView?.let { windowManager.removeView(it) }
-        mediaProjection?.stop()
-        imageReader?.close()
+        stopProjection()
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
 
     private fun dpToPx(dp: Int): Int = (dp * resources.displayMetrics.density).toInt()
 }
-

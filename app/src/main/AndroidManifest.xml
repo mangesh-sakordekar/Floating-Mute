@@ -8,6 +8,7 @@ xmlns:tools="http://schemas.android.com/tools">
         android:required="false" />
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -17,6 +18,7 @@ xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
 
 
     <application
@@ -44,111 +46,192 @@ xmlns:tools="http://schemas.android.com/tools">
         <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+            android:value="ca-app-pub-5342403354416426~4936069504"/>
 
         <service
             android:name=".FloatingButtonService"
+            android:foregroundServiceType="specialUse"
             android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection"
-            tools:ignore="ForegroundServicePermission" />
+            tools:ignore="ForegroundServicePermission">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="SYSTEM_ALERT_WINDOW" />
+        </service>
 
         <service
             android:name=".ScreenshotButtonService"
-            android:exported="false"
             android:foregroundServiceType="mediaProjection"
-            tools:ignore="ForegroundServicePermission" />
+            android:enabled="true"
+            android:exported="false"
+            tools:ignore="ForegroundServicePermission">
+        </service>
+
 
         <service
             android:name=".BrightnessButtonService"
+            android:foregroundServiceType="specialUse"
+            android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection"
-            tools:ignore="ForegroundServicePermission" />
+            tools:ignore="ForegroundServicePermission">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="SYSTEM_ALERT_WINDOW" />
+        </service>
 
         <service
             android:name=".FlashlightButtonService"
+            android:foregroundServiceType="specialUse"
+            android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection"
-            tools:ignore="ForegroundServicePermission" />
+            tools:ignore="ForegroundServicePermission">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="SYSTEM_ALERT_WINDOW" />
+        </service>
 
         <service
             android:name=".StopwatchButtonService"
+            android:foregroundServiceType="specialUse"
+            android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection"
-            tools:ignore="ForegroundServicePermission" />
+            tools:ignore="ForegroundServicePermission">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="SYSTEM_ALERT_WINDOW" />
+        </service>
 
         <service
             android:name=".NotificationModeButtonService"
+            android:foregroundServiceType="specialUse"
+            android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection"
-            tools:ignore="ForegroundServicePermission" />
+            tools:ignore="ForegroundServicePermission">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="SYSTEM_ALERT_WINDOW" />
+        </service>
 
         <service
             android:name=".DNDButtonService"
+            android:foregroundServiceType="specialUse"
+            android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection"
-            tools:ignore="ForegroundServicePermission" />
+            tools:ignore="ForegroundServicePermission">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="SYSTEM_ALERT_WINDOW" />
+        </service>
 
         <service
             android:name=".ScreenOnButtonService"
+            android:foregroundServiceType="specialUse"
+            android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection"
-            tools:ignore="ForegroundServicePermission" />
+            tools:ignore="ForegroundServicePermission">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="SYSTEM_ALERT_WINDOW" />
+        </service>
 
         <service
             android:name=".CountdownTimerButtonService"
+            android:foregroundServiceType="specialUse"
+            android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection"
-            tools:ignore="ForegroundServicePermission" />
-
+            tools:ignore="ForegroundServicePermission">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="SYSTEM_ALERT_WINDOW" />
+        </service>
 
         <service
             android:name=".MirrorFloatingService"
+            android:foregroundServiceType="specialUse"
+            android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection"
-            tools:ignore="ForegroundServicePermission" />
+            tools:ignore="ForegroundServicePermission">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="SYSTEM_ALERT_WINDOW" />
+        </service>
 
         <service
             android:name=".CalculatorFloatingService"
+            android:foregroundServiceType="specialUse"
+            android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection"
-            tools:ignore="ForegroundServicePermission" />
+            tools:ignore="ForegroundServicePermission">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="SYSTEM_ALERT_WINDOW" />
+        </service>
 
         <service
             android:name=".CalculatorButtonService"
+            android:foregroundServiceType="specialUse"
+            android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection"
-            tools:ignore="ForegroundServicePermission" />
+            tools:ignore="ForegroundServicePermission">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="SYSTEM_ALERT_WINDOW" />
+        </service>
 
         <service
             android:name=".FontSizeButtonService"
+            android:foregroundServiceType="specialUse"
+            android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection"
-            tools:ignore="ForegroundServicePermission" />
+            tools:ignore="ForegroundServicePermission">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="SYSTEM_ALERT_WINDOW" />
+        </service>
 
         <service
             android:name=".FloatingNotesService"
+            android:foregroundServiceType="specialUse"
+            android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection"
-            tools:ignore="ForegroundServicePermission" />
+            tools:ignore="ForegroundServicePermission">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="SYSTEM_ALERT_WINDOW" />
+        </service>
 
         <service
             android:name=".NotepadButtonService"
+            android:foregroundServiceType="specialUse"
+            android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection"
-            tools:ignore="ForegroundServicePermission" />
+            tools:ignore="ForegroundServicePermission">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="SYSTEM_ALERT_WINDOW" />
+        </service>
 
         <service
             android:name=".StickyNotesService"
+            android:foregroundServiceType="specialUse"
+            android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection"
-            tools:ignore="ForegroundServicePermission" />
+            tools:ignore="ForegroundServicePermission">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="SYSTEM_ALERT_WINDOW" />
+        </service>
 
         <service
             android:name=".StickyNotesButtonService"
+            android:foregroundServiceType="specialUse"
+            android:enabled="true"
             android:exported="false"
-            android:foregroundServiceType="mediaProjection"
-            tools:ignore="ForegroundServicePermission" />
+            tools:ignore="ForegroundServicePermission">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="SYSTEM_ALERT_WINDOW" />
+        </service>
 
 
 
