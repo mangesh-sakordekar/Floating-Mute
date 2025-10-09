@@ -37,7 +37,7 @@ class DNDButtonService : Service() {
 
         params.gravity = Gravity.TOP or Gravity.START
         params.x = dpToPx(0)
-        params.y = dpToPx(160)
+        params.y = dpToPx(180)
 
         modeIcon = floatingView.findViewById(R.id.dndButton)
         modeIcon.alpha = 0.3f
@@ -169,6 +169,13 @@ class DNDButtonService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         floatingView?.let { windowManager.removeView(it) }
+
+        // Send a broadcast to MainActivity
+        val intent = Intent("SERVICE_DESTROYED")
+        intent.putExtra("message", "DND Button")
+        androidx.localbroadcastmanager.content.LocalBroadcastManager
+            .getInstance(this)
+            .sendBroadcast(intent)
     }
 
     override fun onBind(intent: Intent?) = null

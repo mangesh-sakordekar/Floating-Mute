@@ -47,7 +47,7 @@ class FlashlightButtonService : Service() {
 
         params.gravity = Gravity.TOP or Gravity.START
         params.x = dpToPx(0)
-        params.y = dpToPx(160)
+        params.y = dpToPx(360)
 
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
         windowManager.addView(floatingView, params)
@@ -74,6 +74,8 @@ class FlashlightButtonService : Service() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+
+        toggleFlashlight()
     }
 
     // -----------------------------
@@ -192,6 +194,12 @@ class FlashlightButtonService : Service() {
                 cameraManager?.setTorchMode(it, false)
             }
         }
+        // Send a broadcast to MainActivity
+        val intent = Intent("SERVICE_DESTROYED")
+        intent.putExtra("message", "Flashlight Button")
+        androidx.localbroadcastmanager.content.LocalBroadcastManager
+            .getInstance(this)
+            .sendBroadcast(intent)
     }
 
     override fun onBind(intent: Intent?): IBinder? = null

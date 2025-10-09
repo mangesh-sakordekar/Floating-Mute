@@ -128,10 +128,10 @@
                     android:padding="12dp"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
+                    android:id="@+id/muteText"
                     android:background="@drawable/row_background">
 
                     <TextView
-                        android:id="@+id/muteText"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -142,12 +142,11 @@
                         android:gravity="center_vertical" />
 
 
-                    <ImageButton
-                        android:id="@+id/stopButton"
+                    <ImageView
                         android:layout_width="42dp"
                         android:layout_height="42dp"
                         android:background="@drawable/btn_stop_background"
-                        android:src="@drawable/ic_stop"
+                        android:src="@drawable/ic_mute"
                         android:contentDescription="@string/stop"
                         android:scaleType="centerInside"
                         app:tint="@android:color/white"
@@ -157,6 +156,7 @@
 
                 <!-- Row 3: Brightness Button -->
                 <LinearLayout
+                    android:id="@+id/brightnessText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -168,7 +168,6 @@
                     android:background="@drawable/row_background">
 
                     <TextView
-                        android:id="@+id/brightnessText"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -179,12 +178,12 @@
                         android:gravity="center_vertical" />
 
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/stopBrightnessButton"
                         android:layout_width="42dp"
                         android:layout_height="42dp"
                         android:background="@drawable/btn_stop_background"
-                        android:src="@drawable/ic_stop"
+                        android:src="@drawable/ic_brightness"
                         android:contentDescription="@string/stop"
                         android:scaleType="centerInside"
                         app:tint="@android:color/white"
@@ -201,6 +200,7 @@
 
                 <!-- Row 5: Notification Button -->
                 <LinearLayout
+                    android:id="@+id/notificationText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -211,7 +211,6 @@
                     android:background="@drawable/row_background">
 
                     <TextView
-                        android:id="@+id/notificationText"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -222,12 +221,11 @@
                         android:gravity="center_vertical" />
 
 
-                    <ImageButton
-                        android:id="@+id/stopNotificationButton"
+                    <ImageView
                         android:layout_width="42dp"
                         android:layout_height="42dp"
                         android:background="@drawable/btn_stop_background"
-                        android:src="@drawable/ic_stop"
+                        android:src="@drawable/ic_ring"
                         android:contentDescription="@string/stop"
                         android:scaleType="centerInside"
                         app:tint="@android:color/white"
@@ -236,6 +234,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/dndText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -246,7 +245,6 @@
                     android:background="@drawable/row_background">
 
                     <TextView
-                        android:id="@+id/dndText"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -257,12 +255,11 @@
                         android:gravity="center_vertical" />
 
 
-                    <ImageButton
-                        android:id="@+id/stopDNDButton"
+                    <ImageView
                         android:layout_width="42dp"
                         android:layout_height="42dp"
                         android:background="@drawable/btn_stop_background"
-                        android:src="@drawable/ic_stop"
+                        android:src="@drawable/ic_dnd_on"
                         android:contentDescription="@string/stop"
                         android:scaleType="centerInside"
                         app:tint="@android:color/white"
@@ -279,6 +276,7 @@
 
                 <!-- Font Size Button -->
                 <LinearLayout
+                    android:id="@+id/fontSizeText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -289,7 +287,6 @@
                     android:background="@drawable/row_background">
 
                     <TextView
-                        android:id="@+id/fontSizeText"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -300,12 +297,11 @@
                         android:gravity="center_vertical" />
 
 
-                    <ImageButton
-                        android:id="@+id/stopFontSizeButton"
+                    <ImageView
                         android:layout_width="42dp"
                         android:layout_height="42dp"
                         android:background="@drawable/btn_stop_background"
-                        android:src="@drawable/ic_stop"
+                        android:src="@drawable/ic_font_size"
                         android:contentDescription="@string/stop"
                         android:scaleType="centerInside"
                         app:tint="@android:color/white"
@@ -338,129 +334,9 @@
                 android:orientation="horizontal"
                 android:gravity="center">
 
-                <!-- Row 4: FlashLight Button -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="12dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/row_background">
-
-                    <TextView
-                        android:id="@+id/flashlightText"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:text="Flashlight"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white"
-                        android:gravity="center_vertical" />
-
-
-                    <ImageButton
-                        android:id="@+id/stopFlashlightButton"
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:background="@drawable/btn_stop_background"
-                        android:src="@drawable/ic_stop"
-                        android:contentDescription="@string/stop"
-                        android:scaleType="centerInside"
-                        app:tint="@android:color/white"
-                        android:layout_marginStart="8dp"
-                        android:padding="12dp"/>
-                </LinearLayout>
-
-
-
-                <!-- Row 6: Stopwatch Button -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="12dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/row_background">
-
-                    <TextView
-                        android:id="@+id/stopwatchText"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:text="Stopwatch"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white"
-                        android:gravity="center_vertical" />
-
-
-                    <ImageButton
-                        android:id="@+id/stopStopwatchButton"
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:background="@drawable/btn_stop_background"
-                        android:src="@drawable/ic_stop"
-                        android:contentDescription="@string/stop"
-                        android:scaleType="centerInside"
-                        app:tint="@android:color/white"
-                        android:layout_marginStart="8dp"
-                        android:padding="12dp"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-                <!-- Row 4: FlashLight Button -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="12dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/row_background">
-
-                    <TextView
-                        android:id="@+id/screenOnText"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:text="Screen On"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white"
-                        android:gravity="center_vertical" />
-
-
-                    <ImageButton
-                        android:id="@+id/stopScreenOnButton"
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:background="@drawable/btn_stop_background"
-                        android:src="@drawable/ic_stop"
-                        android:contentDescription="@string/stop"
-                        android:scaleType="centerInside"
-                        app:tint="@android:color/white"
-                        android:layout_marginStart="8dp"
-                        android:padding="12dp"/>
-                </LinearLayout>
-
-
-
                 <!-- Row 4: Countdown Timer Button -->
                 <LinearLayout
+                    android:id="@+id/countdownTimerText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -468,10 +344,10 @@
                     android:gravity="center_vertical"
                     android:padding="12dp"
                     android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
                     android:background="@drawable/row_background">
 
                     <TextView
-                        android:id="@+id/countdownTimerText"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -482,12 +358,50 @@
                         android:gravity="center_vertical" />
 
 
-                    <ImageButton
-                        android:id="@+id/stopTimerButton"
+                    <ImageView
                         android:layout_width="42dp"
                         android:layout_height="42dp"
                         android:background="@drawable/btn_stop_background"
-                        android:src="@drawable/ic_stop"
+                        android:src="@drawable/ic_timer"
+                        android:contentDescription="@string/stop"
+                        android:scaleType="centerInside"
+                        app:tint="@android:color/white"
+                        android:layout_marginStart="8dp"
+                        android:padding="12dp"/>
+                </LinearLayout>
+
+
+
+
+                <!-- Row 6: Stopwatch Button -->
+                <LinearLayout
+                    android:id="@+id/stopwatchText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="12dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/row_background">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:text="Stopwatch"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"
+                        android:gravity="center_vertical" />
+
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/btn_stop_background"
+                        android:src="@drawable/ic_stopwatch"
                         android:contentDescription="@string/stop"
                         android:scaleType="centerInside"
                         app:tint="@android:color/white"
@@ -502,8 +416,9 @@
                 android:orientation="horizontal"
                 android:gravity="center">
 
-                <!-- Mirror Button -->
+                <!-- Row 4: FlashLight Button -->
                 <LinearLayout
+                    android:id="@+id/screenOnText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -514,7 +429,85 @@
                     android:background="@drawable/row_background">
 
                     <TextView
-                        android:id="@+id/mirrorText"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:text="Screen On"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"
+                        android:gravity="center_vertical" />
+
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/btn_stop_background"
+                        android:src="@drawable/ic_screen_on"
+                        android:contentDescription="@string/stop"
+                        android:scaleType="centerInside"
+                        app:tint="@android:color/white"
+                        android:layout_marginStart="8dp"
+                        android:padding="10dp"/>
+                </LinearLayout>
+
+
+                <!-- Row 4: FlashLight Button -->
+                <LinearLayout
+                    android:id="@+id/flashlightText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="12dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/row_background">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:text="Flashlight"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"
+                        android:gravity="center_vertical" />
+
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/btn_stop_background"
+                        android:src="@drawable/ic_flashlight"
+                        android:contentDescription="@string/stop"
+                        android:scaleType="centerInside"
+                        app:tint="@android:color/white"
+                        android:layout_marginStart="8dp"
+                        android:padding="8dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <!-- Mirror Button -->
+                <LinearLayout
+                    android:id="@+id/mirrorText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="12dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/row_background">
+
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -525,12 +518,11 @@
                         android:gravity="center_vertical" />
 
 
-                    <ImageButton
-                        android:id="@+id/stopMirrorButton"
+                    <ImageView
                         android:layout_width="42dp"
                         android:layout_height="42dp"
                         android:background="@drawable/btn_stop_background"
-                        android:src="@drawable/ic_stop"
+                        android:src="@drawable/ic_mirror"
                         android:contentDescription="@string/stop"
                         android:scaleType="centerInside"
                         app:tint="@android:color/white"
@@ -541,6 +533,7 @@
 
                 <!-- Calculator Button -->
                 <LinearLayout
+                    android:id="@+id/calculatorText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -551,7 +544,6 @@
                     android:background="@drawable/row_background">
 
                     <TextView
-                        android:id="@+id/calculatorText"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -562,12 +554,11 @@
                         android:gravity="center_vertical" />
 
 
-                    <ImageButton
-                        android:id="@+id/stopCalculatorButton"
+                    <ImageView
                         android:layout_width="42dp"
                         android:layout_height="42dp"
                         android:background="@drawable/btn_stop_background"
-                        android:src="@drawable/ic_stop"
+                        android:src="@drawable/ic_calculator"
                         android:contentDescription="@string/stop"
                         android:scaleType="centerInside"
                         app:tint="@android:color/white"
@@ -585,6 +576,7 @@
 
                 <!-- Font Size Button -->
                 <LinearLayout
+                    android:id="@+id/notepadText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -595,7 +587,6 @@
                     android:background="@drawable/row_background">
 
                     <TextView
-                        android:id="@+id/notepadText"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -606,12 +597,11 @@
                         android:gravity="center_vertical" />
 
 
-                    <ImageButton
-                        android:id="@+id/stopNotepadButton"
+                    <ImageView
                         android:layout_width="42dp"
                         android:layout_height="42dp"
                         android:background="@drawable/btn_stop_background"
-                        android:src="@drawable/ic_stop"
+                        android:src="@drawable/ic_notepad"
                         android:contentDescription="@string/stop"
                         android:scaleType="centerInside"
                         app:tint="@android:color/white"
@@ -621,6 +611,7 @@
 
                 <!-- Sticky Notes Size Button -->
                 <LinearLayout
+                    android:id="@+id/stickyNotesText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -631,7 +622,6 @@
                     android:background="@drawable/row_background">
 
                     <TextView
-                        android:id="@+id/stickyNotesText"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -642,12 +632,11 @@
                         android:gravity="center_vertical" />
 
 
-                    <ImageButton
-                        android:id="@+id/stopStickyNotesButton"
+                    <ImageView
                         android:layout_width="42dp"
                         android:layout_height="42dp"
                         android:background="@drawable/btn_stop_background"
-                        android:src="@drawable/ic_stop"
+                        android:src="@drawable/ic_sticky_note"
                         android:contentDescription="@string/stop"
                         android:scaleType="centerInside"
                         app:tint="@android:color/white"
@@ -676,6 +665,7 @@
 
                 <!-- Row 2: Screenshot Button -->
                 <LinearLayout
+                    android:id="@+id/screenshotText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -687,7 +677,6 @@
                     android:background="@drawable/row_background">
 
                     <TextView
-                        android:id="@+id/screenshotText"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
@@ -698,12 +687,11 @@
                         android:gravity="center_vertical" />
 
 
-                    <ImageButton
-                        android:id="@+id/stopScreenshotButton"
+                    <ImageView
                         android:layout_width="42dp"
                         android:layout_height="42dp"
                         android:background="@drawable/btn_stop_background"
-                        android:src="@drawable/ic_stop"
+                        android:src="@drawable/ic_screenshot"
                         android:contentDescription="@string/stop"
                         android:scaleType="centerInside"
                         app:tint="@android:color/white"

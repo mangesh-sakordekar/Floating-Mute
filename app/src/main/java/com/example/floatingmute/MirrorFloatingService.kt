@@ -216,6 +216,13 @@ class MirrorFloatingService : Service() {
 
         val displayManager = getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
         displayManager.unregisterDisplayListener(displayListener)
+
+        // Send a broadcast to MainActivity
+        val intent = Intent("SERVICE_DESTROYED")
+        intent.putExtra("message", "Mirror Button")
+        androidx.localbroadcastmanager.content.LocalBroadcastManager
+            .getInstance(this)
+            .sendBroadcast(intent)
     }
 
     override fun onBind(intent: Intent?): IBinder? = null

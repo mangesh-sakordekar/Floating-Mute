@@ -41,7 +41,7 @@ class FontSizeButtonService : Service() {
 
         params.gravity = Gravity.TOP or Gravity.START
         params.x = dpToPx(0)
-        params.y = dpToPx(160)
+        params.y = dpToPx(220)
 
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
         windowManager.addView(floatingView, params)
@@ -186,6 +186,12 @@ class FontSizeButtonService : Service() {
             toggleFontSize()
         }
         floatingView?.let { windowManager.removeView(it) }
+        // Send a broadcast to MainActivity
+        val intent = Intent("SERVICE_DESTROYED")
+        intent.putExtra("message", "Font Button")
+        androidx.localbroadcastmanager.content.LocalBroadcastManager
+            .getInstance(this)
+            .sendBroadcast(intent)
     }
 
     override fun onBind(intent: Intent?): IBinder? = null

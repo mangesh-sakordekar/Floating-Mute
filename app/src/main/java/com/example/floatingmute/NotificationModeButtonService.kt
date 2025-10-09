@@ -40,7 +40,7 @@ class NotificationModeButtonService : Service() {
 
         params.gravity = Gravity.TOP or Gravity.START
         params.x = dpToPx(0)
-        params.y = dpToPx(160)
+        params.y = dpToPx(140)
 
         modeIcon = floatingView.findViewById(R.id.notificationButton)
         modeIcon.alpha = 0.3f
@@ -178,6 +178,13 @@ class NotificationModeButtonService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         floatingView?.let { windowManager.removeView(it) }
+
+        // Send a broadcast to MainActivity
+        val intent = Intent("SERVICE_DESTROYED")
+        intent.putExtra("message", "Alert Button")
+        androidx.localbroadcastmanager.content.LocalBroadcastManager
+            .getInstance(this)
+            .sendBroadcast(intent)
     }
 
     override fun onBind(intent: Intent?) = null

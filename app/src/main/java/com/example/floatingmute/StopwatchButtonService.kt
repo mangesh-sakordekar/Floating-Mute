@@ -47,7 +47,7 @@ class StopwatchButtonService : Service() {
 
         params.gravity = Gravity.TOP or Gravity.START
         params.x = dpToPx(0)
-        params.y = dpToPx(160)
+        params.y = dpToPx(290)
 
         stopwatchText = floatingView.findViewById(R.id.stopwatchTime)
         floatingView.alpha = 0.3f
@@ -217,6 +217,12 @@ class StopwatchButtonService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         floatingView?.let { windowManager.removeView(it) }
+        // Send a broadcast to MainActivity
+        val intent = Intent("SERVICE_DESTROYED")
+        intent.putExtra("message", "Stopwatch Button")
+        androidx.localbroadcastmanager.content.LocalBroadcastManager
+            .getInstance(this)
+            .sendBroadcast(intent)
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
