@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="18dp"
+    android:gravity="top">
+
+    <!-- Section 1: Settings -->
+    <!-- Section 1: Quick Settings -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Row 1: Mute Button -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/muteText"
+            android:background="@drawable/row_background">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Mute"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="center_vertical" />
+
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/icon_image_background"
+                android:src="@drawable/ic_mute"
+                android:contentDescription="@string/stop"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="12dp"/>
+        </LinearLayout>
+
+        <!-- Row 3: Brightness Button -->
+        <LinearLayout
+            android:id="@+id/brightnessText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/row_background">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Brightness"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="center_vertical" />
+
+
+            <ImageView
+                android:id="@+id/stopBrightnessButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/icon_image_background"
+                android:src="@drawable/ic_brightness"
+                android:contentDescription="@string/stop"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="12dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Row 5: Notification Button -->
+        <LinearLayout
+            android:id="@+id/notificationText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/row_background">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Alert Toggle"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="center_vertical" />
+
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/icon_image_background"
+                android:src="@drawable/ic_ring"
+                android:contentDescription="@string/stop"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="12dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dndText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/row_background">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="DND"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="center_vertical" />
+
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/icon_image_background"
+                android:src="@drawable/ic_dnd_on"
+                android:contentDescription="@string/stop"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="12dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Font Size Button -->
+        <LinearLayout
+            android:id="@+id/fontSizeText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/row_background">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Font Size"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="center_vertical" />
+
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/icon_image_background"
+                android:src="@drawable/ic_font_size"
+                android:contentDescription="@string/stop"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444"
+        android:layout_marginVertical="25dp"
+        android:layout_marginHorizontal="40dp"/>
+
+    <!-- Section 2: Tools -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tools"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="5dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Row 4: Countdown Timer Button -->
+        <LinearLayout
+            android:id="@+id/countdownTimerText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/row_background">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Timer"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="center_vertical" />
+
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/icon_image_background"
+                android:src="@drawable/ic_timer"
+                android:contentDescription="@string/stop"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="12dp"/>
+        </LinearLayout>
+
+
+
+
+        <!-- Row 6: Stopwatch Button -->
+        <LinearLayout
+            android:id="@+id/stopwatchText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/row_background">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Stopwatch"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="center_vertical" />
+
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/icon_image_background"
+                android:src="@drawable/ic_stopwatch"
+                android:contentDescription="@string/stop"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="12dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Row 4: FlashLight Button -->
+        <LinearLayout
+            android:id="@+id/screenOnText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/row_background">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Screen On"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="center_vertical" />
+
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/icon_image_background"
+                android:src="@drawable/ic_screen_on"
+                android:contentDescription="@string/stop"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="10dp"/>
+        </LinearLayout>
+
+
+        <!-- Row 4: FlashLight Button -->
+        <LinearLayout
+            android:id="@+id/flashlightText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/row_background">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Flashlight"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="center_vertical" />
+
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/icon_image_background"
+                android:src="@drawable/ic_flashlight"
+                android:contentDescription="@string/stop"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="8dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Mirror Button -->
+        <LinearLayout
+            android:id="@+id/mirrorText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/row_background">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Mirror"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="center_vertical" />
+
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/icon_image_background"
+                android:src="@drawable/ic_mirror"
+                android:contentDescription="@string/stop"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="10dp"/>
+        </LinearLayout>
+
+
+        <!-- Calculator Button -->
+        <LinearLayout
+            android:id="@+id/calculatorText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/row_background">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Calculator"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="center_vertical" />
+
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/icon_image_background"
+                android:src="@drawable/ic_calculator"
+                android:contentDescription="@string/stop"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="12dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Font Size Button -->
+        <LinearLayout
+            android:id="@+id/notepadText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/row_background">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Notepad"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="center_vertical" />
+
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/icon_image_background"
+                android:src="@drawable/ic_notepad"
+                android:contentDescription="@string/stop"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:paddingVertical="12dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="8dp"/>
+        </LinearLayout>
+
+        <!-- Sticky Notes Size Button -->
+        <LinearLayout
+            android:id="@+id/stickyNotesText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/row_background">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Sticky Notes"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="center_vertical" />
+
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/icon_image_background"
+                android:src="@drawable/ic_sticky_note"
+                android:contentDescription="@string/stop"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="10dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444"
+        android:layout_marginVertical="25dp"
+        android:layout_marginHorizontal="40dp"/>
+
+
+    <!-- Section 3: Media -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Media"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="5dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Row 2: Screenshot Button -->
+        <LinearLayout
+            android:id="@+id/screenshotText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/row_background">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Screenshot"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:gravity="center_vertical" />
+
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/icon_image_background"
+                android:src="@drawable/ic_screenshot"
+                android:contentDescription="@string/stop"
+                android:scaleType="centerInside"
+                app:tint="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:padding="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <!-- (Paste your Media section rows here, like Screenshot, etc.) -->
+
+</LinearLayout>

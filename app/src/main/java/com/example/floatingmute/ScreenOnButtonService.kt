@@ -166,6 +166,9 @@ class ScreenOnButtonService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
+        if(isScreenOnForced){
+            toggleMode()
+        }
         floatingView?.let { windowManager.removeView(it) }
         // Send a broadcast to MainActivity
         val intent = Intent("SERVICE_DESTROYED")

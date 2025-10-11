@@ -24,6 +24,7 @@ import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import android.content.IntentFilter
+import android.widget.ImageView
 import android.widget.LinearLayout
 
 
@@ -37,6 +38,8 @@ class MainActivity : AppCompatActivity() {
     private val CAMERA_PERMISSION_REQUEST = 2001
 
     private var _bannerAd: AdView? = null
+
+    private var isMenuOpen = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,14 +80,62 @@ class MainActivity : AppCompatActivity() {
 
         val startStickyNotesButton = findViewById<LinearLayout>(R.id.stickyNotesText)
 
+        val menuIcon = findViewById<ImageView>(R.id.menuIcon)
+        val rightMenu = findViewById<LinearLayout>(R.id.rightMenuPanel)
+        val closeBtn = findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.closeServicesButton)
+
 
         MobileAds.initialize(this@MainActivity)
         loadBannerAd()
+
+        findViewById<LinearLayout>(R.id.howToUseOption).setOnClickListener {
+            Toast.makeText(this, "Show How to Use screen", Toast.LENGTH_SHORT).show()
+            menuIcon.performClick()
+        }
+
+        findViewById<LinearLayout>(R.id.aboutAppOption).setOnClickListener {
+            Toast.makeText(this, "Show About App screen", Toast.LENGTH_SHORT).show()
+            menuIcon.performClick()
+        }
+
+        findViewById<LinearLayout>(R.id.contactUsOption).setOnClickListener {
+            Toast.makeText(this, "Show Contact Us screen", Toast.LENGTH_SHORT).show()
+            menuIcon.performClick()
+        }
 
         updateOverlayBackground()
         updateWriteBackground()
         updateDNDBackground()
         updateCameraBackground()
+
+        menuIcon.setOnClickListener {
+            val targetX = if (isMenuOpen) rightMenu.width.toFloat() else 0f
+            rightMenu.animate()
+                .translationX(targetX)
+                .setDuration(300)
+                .start()
+            isMenuOpen = !isMenuOpen
+        }
+
+        closeBtn.setOnClickListener {
+            // Stop all services here
+            stopService(Intent(this, FloatingButtonService::class.java))
+            stopService(Intent(this, BrightnessButtonService::class.java))
+            stopService(Intent(this, NotificationModeButtonService::class.java))
+            stopService(Intent(this, DNDButtonService::class.java))
+            stopService(Intent(this, FontSizeButtonService::class.java))
+            stopService(Intent(this, CountdownTimerButtonService::class.java))
+            stopService(Intent(this, StopwatchButtonService::class.java))
+            stopService(Intent(this, ScreenOnButtonService::class.java))
+            stopService(Intent(this, FlashlightButtonService::class.java))
+            stopService(Intent(this, MirrorFloatingService::class.java))
+            stopService(Intent(this, CalculatorButtonService::class.java))
+            stopService(Intent(this, NotepadButtonService::class.java))
+            stopService(Intent(this, StickyNotesButtonService::class.java))
+            stopService(Intent(this, ScreenshotButtonService::class.java))
+
+            Toast.makeText(this, "Closed all tools.", Toast.LENGTH_SHORT).show()
+        }
 
         overlayPermissionButton.setOnClickListener {
             if (Settings.canDrawOverlays(this)) {
