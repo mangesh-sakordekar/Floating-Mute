@@ -10,11 +10,16 @@
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">#00000000</item>
+        <item name="android:statusBarColor">#000000</item>
         <!-- Customize your theme here. -->
         <!-- Navigation bar color -->
         <item name="android:navigationBarColor">#000000</item> <!-- example: purple -->
         <item name="android:windowLightNavigationBar">false</item> <!-- white icons -->
     </style>
 
+    <style name="Theme.FloatingTools.HowToUse" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">#000000</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">#000000</item> <!-- example: purple -->
+    </style>
 </resources>

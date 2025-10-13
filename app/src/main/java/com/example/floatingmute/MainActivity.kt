@@ -88,18 +88,31 @@ class MainActivity : AppCompatActivity() {
         MobileAds.initialize(this@MainActivity)
         loadBannerAd()
 
+        rightMenu.setOnClickListener {
+            menuIcon.performClick()
+        }
+
         findViewById<LinearLayout>(R.id.howToUseOption).setOnClickListener {
-            Toast.makeText(this, "Show How to Use screen", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, HowToUseActivity::class.java)
+            startActivity(intent)
             menuIcon.performClick()
         }
 
         findViewById<LinearLayout>(R.id.aboutAppOption).setOnClickListener {
-            Toast.makeText(this, "Show About App screen", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, AboutAppActivity::class.java)
+            startActivity(intent)
             menuIcon.performClick()
         }
 
         findViewById<LinearLayout>(R.id.contactUsOption).setOnClickListener {
-            Toast.makeText(this, "Show Contact Us screen", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, ContactUsActivity::class.java)
+            startActivity(intent)
+            menuIcon.performClick()
+        }
+
+        findViewById<LinearLayout>(R.id.settingsOption).setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
             menuIcon.performClick()
         }
 

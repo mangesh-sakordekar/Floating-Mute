@@ -234,6 +234,21 @@ xmlns:tools="http://schemas.android.com/tools">
         </service>
 
 
+        <activity android:name=".HowToUseActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FloatingTools.HowToUse"/>
+
+        <activity android:name=".AboutAppActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FloatingTools.HowToUse"/>
+
+        <activity android:name=".ContactUsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FloatingTools.HowToUse"/>
+
+        <activity android:name=".SettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FloatingTools.HowToUse"/>
 
     </application>
 
