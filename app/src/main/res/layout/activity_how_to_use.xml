@@ -50,42 +50,87 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="📌 How to Use Floating Tools"
+                android:text="📱 Layout"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:paddingBottom="12dp"
+                android:paddingBottom="5dp"
                 android:textColor="@color/white"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="1. Tap the floating button to access quick tools."
-                android:textSize="16sp"
-                android:paddingBottom="8dp"
+                android:text="@string/how_to_use_layout"
+                android:textSize="14sp"
+                android:paddingBottom="30dp"
                 android:textColor="@color/white"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2. Long-press to drag the floating icon anywhere on the screen."
-                android:textSize="16sp"
-                android:paddingBottom="8dp"
+                android:text="🔐 Permissions️"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:paddingBottom="5dp"
                 android:textColor="@color/white"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="3. Use the menu to take screenshots or access sticky notes."
-                android:textSize="16sp"
-                android:paddingBottom="8dp"
+                android:text="@string/how_to_use_permissions"
+                android:textSize="14sp"
+                android:paddingBottom="30dp"
                 android:textColor="@color/white"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="4. Tap and hold the floating icon near the bottom edge to close it."
-                android:textSize="16sp"
+                android:text="🚀 Launching Tools"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:paddingBottom="5dp"
                 android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/txtHTULaunch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:paddingBottom="30dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🛑 Stopping Toggles"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:paddingBottom="5dp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/how_to_use_stop"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:paddingBottom="30dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📌 Available Tools"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:paddingBottom="5dp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/txtHTUTools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:paddingBottom="10dp"/>
 
         </LinearLayout>
     </ScrollView>

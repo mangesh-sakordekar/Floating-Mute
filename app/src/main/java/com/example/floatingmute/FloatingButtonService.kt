@@ -49,6 +49,11 @@ class FloatingButtonService : Service() {
 
         val button = floatingView!!.findViewById<ImageButton>(R.id.muteButton)
         button.alpha = 0.3f
+        previousVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        if(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) == 0){
+            isMuted = true
+            button.setImageResource(R.drawable.ic_mute)
+        }
         enableDragAndSnap(button, params)
 
         startForegroundService()

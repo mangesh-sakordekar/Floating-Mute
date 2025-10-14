@@ -2,4 +2,44 @@
     <string name="app_name">Floating Tools</string>
     <string name="stop">Stop</string>
     <string name="start">Start</string>
+    <string name="how_to_use_layout">
+        Top row buttons shows the permissions required. Buttons to launch the tools occupy rest of
+        the area. The Stop (red) Button is at the bottom right corner.
+    </string>
+    <string name="how_to_use_permissions">
+        Click the permission buttons to grant the permission. Once it is granted the
+        button will turn green!
+    </string>
+    <string name="how_to_use_launching">
+        <![CDATA[
+        Tap the button to launch a floating toggle on the screen’s edge. You can drag it anywhere.
+        Tap the toggle to use the tool or perform the action. Active toggles turn their buttons red.
+        Calculator and Notepad save your work automatically. Launching the screenshot toggle will prompt
+        you to give media projection permission. More usage info and functionality of the toggles can
+        be found below.<br/><br/>
+        IMPORTANT: For Notepad and Sticky Notes, tap the check button after typing to exit edit mode.
+        ]]>
+    </string>
+    <string name="how_to_use_stop">
+        To stop a toggle, tap its button again or drag it to the bottom of the screen. You can also
+        use the Stop button to close all toggles. Mirror and Sticky Notes have their own close buttons.
+    </string>
+
+    <string name="how_to_use_tools">
+        <![CDATA[
+        <b>Mute:</b> Mutes and restores media volume.<br/>
+        <b>Brightness:</b> Reduces and restores brightness.<br/>
+        <b>Alert Toggle:</b> Toggles between Ring, Vibrate and Silent modes.<br/>
+        <b>DND:</b> Toggles DND mode on and off.<br/>
+        <b>Font Size:</b> Maximizes and restores the system font size.<br/>
+        <b>Timer:</b> Tap to start/stop, long press to reset. Allows custom time.<br/>
+        <b>Stopwatch:</b> Tap to start/stop, long press to reset.<br/>
+        <b>Screen On:</b> Prevents screen from dimming when active.<br/>
+        <b>Mirror:</b> Uses front camera to feed to function as a mirror.<br/>
+        <b>Flashlight:</b> Turns phone flashlight on and off.<br/>
+        <b>Calculator:</b> Opens and closes a basic floating calculator.<br/>
+        <b>Notepad:</b> Opens and closes floating notepad.<br/>
+        <b>Sticky Notes:</b> Launches new sticky note to the screen.<br/>
+        <b>Screenshot:</b> Takes a screenshot.]]>
+    </string>
 </resources>
