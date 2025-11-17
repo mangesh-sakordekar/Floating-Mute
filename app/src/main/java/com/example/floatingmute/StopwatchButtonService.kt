@@ -9,6 +9,8 @@ import android.view.*
 import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import android.app.Service
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.*
 
 
@@ -24,6 +26,8 @@ class StopwatchButtonService : Service() {
     private val handler = Handler(Looper.getMainLooper())
     private var timerRunnable: Runnable? = null
 
+    private lateinit var prefs: SharedPreferences
+
     override fun onCreate() {
         super.onCreate()
 
@@ -36,6 +40,8 @@ class StopwatchButtonService : Service() {
         } else {
             WindowManager.LayoutParams.TYPE_PHONE
         }
+
+        prefs = getSharedPreferences("floating_notes", Context.MODE_PRIVATE)
 
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -168,10 +174,12 @@ class StopwatchButtonService : Service() {
                             if (params.y > screenHeight - 150) {
                                 stopSelf()
                             } else {
-                                val middleX = params.x + v.width / 2
-                                val snapLeft = edgeMargin
-                                val snapRight = screenWidth - v.width - edgeMargin
-                                params.x = if (middleX >= screenWidth / 2) snapRight else snapLeft
+                                if(prefs.getBoolean("flag_snapToEdge", true)) {
+                                    val middleX = params.x + v.width / 2
+                                    val snapLeft = edgeMargin
+                                    val snapRight = screenWidth - v.width - edgeMargin
+                                    params.x = if (middleX >= screenWidth / 2) snapRight else snapLeft
+                                }
                                 windowManager.updateViewLayout(floatingView, params)
                             }
                         }

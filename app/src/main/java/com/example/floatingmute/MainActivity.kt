@@ -46,10 +46,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val overlayPermissionButton = findViewById<TextView>(R.id.overlayPermissionText)
-        val writePermissionButton = findViewById<TextView>(R.id.writePermissionText)
-        val dndPermissionButton = findViewById<TextView>(R.id.dndPermissionText)
-        val cameraPermissionButton = findViewById<TextView>(R.id.cameraPermissionText)
 
 
         val startMuteButton = findViewById<LinearLayout>(R.id.muteText)
@@ -116,10 +112,6 @@ class MainActivity : AppCompatActivity() {
             menuIcon.performClick()
         }
 
-        updateOverlayBackground()
-        updateWriteBackground()
-        updateDNDBackground()
-        updateCameraBackground()
 
         menuIcon.setOnClickListener {
             val targetX = if (isMenuOpen) rightMenu.width.toFloat() else 0f
@@ -150,50 +142,6 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Closed all tools.", Toast.LENGTH_SHORT).show()
         }
 
-        overlayPermissionButton.setOnClickListener {
-            if (Settings.canDrawOverlays(this)) {
-                Toast.makeText(this, "Overlay permission already granted!", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Overlay permission required", Toast.LENGTH_SHORT).show()
-                requestOverlayPermission()
-            }
-            loadBannerAd()
-        }
-
-        writePermissionButton.setOnClickListener {
-            if (Settings.System.canWrite(this)) {
-                Toast.makeText(this, "Write Settings permission already granted", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                Toast.makeText(this, "Write Settings permission required", Toast.LENGTH_SHORT).show()
-                checkAndRequestWriteSettings()
-            }
-            loadBannerAd()
-        }
-
-        cameraPermissionButton.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Camera permission already granted", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                Toast.makeText(this, "Camera permission required", Toast.LENGTH_SHORT).show()
-                requestCameraPermission()
-            }
-            loadBannerAd()
-        }
-
-        dndPermissionButton.setOnClickListener {
-            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            if (notificationManager.isNotificationPolicyAccessGranted){
-                Toast.makeText(this, "Notification Policy permission already granted!", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                Toast.makeText(this, "Notification Policy permission required", Toast.LENGTH_SHORT).show()
-                changeDoNotDisturbState()
-            }
-            loadBannerAd()
-        }
 
         // Start Mute Button Service
         startMuteButton.setOnClickListener {
@@ -541,10 +489,6 @@ class MainActivity : AppCompatActivity() {
         LocalBroadcastManager.getInstance(this)
             .registerReceiver(serviceDestroyedReceiver, IntentFilter("SERVICE_DESTROYED"))
 
-        updateOverlayBackground()
-        updateWriteBackground()
-        updateDNDBackground()
-        updateCameraBackground()
 
         updateButtonBackground(findViewById(R.id.muteText), isMyServiceRunning(FloatingButtonService::class.java))
         updateButtonBackground(findViewById(R.id.brightnessText), isMyServiceRunning(BrightnessButtonService::class.java))
@@ -590,12 +534,6 @@ class MainActivity : AppCompatActivity() {
             startService(intent)
         } else if (requestCode == SCREENSHOT_REQUEST_CODE) {
             Toast.makeText(this, "Screenshot permission denied", Toast.LENGTH_SHORT).show()
-        } else if (requestCode == OVERLAY_REQUEST_CODE){
-            updateOverlayBackground()
-        } else if (requestCode == WRITE_REQUEST_CODE){
-            updateWriteBackground()
-        } else if (requestCode == DND_REQUEST_CODE){
-            updateDNDBackground()
         }
     }
 
@@ -604,7 +542,7 @@ class MainActivity : AppCompatActivity() {
             Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
             android.net.Uri.parse("package:$packageName")
         )
-        startActivityForResult(intent, 1002)
+        startActivity(intent)
     }
 
     private fun requestCameraPermission() {
@@ -624,7 +562,7 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == CAMERA_PERMISSION_REQUEST) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted → start service
-                updateCameraBackground()
+                Toast.makeText(this, "Camera permission granted", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "Camera permission is required for mirror", Toast.LENGTH_SHORT).show()
             }
@@ -637,7 +575,7 @@ class MainActivity : AppCompatActivity() {
                 data = Uri.parse("package:$packageName")
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
-            startActivityForResult(intent, WRITE_REQUEST_CODE)
+            startActivity(intent)
             //Toast.makeText(this, "Please allow Modify System Settings", Toast.LENGTH_LONG).show()
         }
     }
@@ -649,51 +587,11 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) // Required if starting from a Service
-            startActivityForResult(intent, DND_REQUEST_CODE)
+            startActivity(intent)
         }
     }
 
-    private fun updateOverlayBackground(){
-        val overlayPermissionButton = findViewById<TextView>(R.id.overlayPermissionText)
-        if(Settings.canDrawOverlays(this)){
-            overlayPermissionButton.setBackgroundResource(R.drawable.row_green_background)
-        }
-        else{
-            overlayPermissionButton.setBackgroundResource(R.drawable.row_red_background)
-        }
-    }
 
-    private fun updateWriteBackground(){
-        val writePermissionButton = findViewById<TextView>(R.id.writePermissionText)
-        if(Settings.System.canWrite(this)){
-            writePermissionButton.setBackgroundResource(R.drawable.row_green_background)
-        }
-        else{
-            writePermissionButton.setBackgroundResource(R.drawable.row_red_background)
-        }
-    }
-
-    private fun updateDNDBackground(){
-        val dndPermissionButton = findViewById<TextView>(R.id.dndPermissionText)
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        if(notificationManager.isNotificationPolicyAccessGranted){
-            dndPermissionButton.setBackgroundResource(R.drawable.row_green_background)
-        }
-        else{
-            dndPermissionButton.setBackgroundResource(R.drawable.row_red_background)
-        }
-    }
-
-    private fun updateCameraBackground(){
-        val cameraPermissionButton = findViewById<TextView>(R.id.cameraPermissionText)
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-            == PackageManager.PERMISSION_GRANTED){
-            cameraPermissionButton.setBackgroundResource(R.drawable.row_green_background)
-        }
-        else{
-            cameraPermissionButton.setBackgroundResource(R.drawable.row_red_background)
-        }
-    }
 
     private fun isMyServiceRunning(serviceClass: Class<*>): Boolean {
         val manager = getSystemService(ACTIVITY_SERVICE) as ActivityManager

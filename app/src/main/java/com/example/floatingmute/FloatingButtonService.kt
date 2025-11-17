@@ -3,6 +3,7 @@ package com.example.floatingtools
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.PixelFormat
 import android.media.AudioManager
 import android.os.Build
@@ -19,6 +20,8 @@ class FloatingButtonService : Service() {
     private var isMuted = false
     private var previousVolume = 0
 
+    private lateinit var prefs: SharedPreferences
+
     override fun onCreate() {
         super.onCreate()
         audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
@@ -31,6 +34,8 @@ class FloatingButtonService : Service() {
         } else {
             WindowManager.LayoutParams.TYPE_PHONE
         }
+
+        prefs = getSharedPreferences("floating_notes", Context.MODE_PRIVATE)
 
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -133,10 +138,12 @@ class FloatingButtonService : Service() {
                         }
                         else {
                             // Snap to nearest horizontal edge
-                            val middleX = params.x + v.width / 2
-                            val snapLeft = edgeMargin
-                            val snapRight = screenWidth - v.width - edgeMargin
-                            params.x = if (middleX >= screenWidth / 2) snapRight else snapLeft
+                            if(prefs.getBoolean("flag_snapToEdge", true)) {
+                                val middleX = params.x + v.width / 2
+                                val snapLeft = edgeMargin
+                                val snapRight = screenWidth - v.width - edgeMargin
+                                params.x = if (middleX >= screenWidth / 2) snapRight else snapLeft
+                            }
                             windowManager.updateViewLayout(floatingView, params)
                         }
                     }

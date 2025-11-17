@@ -1,6 +1,7 @@
 package com.example.floatingtools
 
 import android.app.*
+import android.content.Context
 import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.Build
@@ -8,12 +9,15 @@ import android.os.IBinder
 import android.view.*
 import android.widget.ImageButton
 import androidx.core.app.NotificationCompat
+import android.content.SharedPreferences
 
 class NotepadButtonService : Service() {
 
     private lateinit var windowManager: WindowManager
     private var floatingView: View? = null
     private var isOn = false
+
+    private lateinit var prefs: SharedPreferences
 
     override fun onCreate() {
         super.onCreate()
@@ -27,6 +31,8 @@ class NotepadButtonService : Service() {
         } else {
             WindowManager.LayoutParams.TYPE_PHONE
         }
+
+        prefs = getSharedPreferences("floating_notes", Context.MODE_PRIVATE)
 
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -48,7 +54,9 @@ class NotepadButtonService : Service() {
         enableDragAndSnap(button, params)
 
         startForegroundService()
-        toggle()
+        if(prefs.getBoolean("flag_launchTools", true)){
+            toggle()
+        }
     }
 
     // -----------------------------
@@ -118,10 +126,12 @@ class NotepadButtonService : Service() {
                         }
                         else {
                             // Snap to nearest horizontal edge
-                            val middleX = params.x + v.width / 2
-                            val snapLeft = edgeMargin
-                            val snapRight = screenWidth - v.width - edgeMargin
-                            params.x = if (middleX >= screenWidth / 2) snapRight else snapLeft
+                            if(prefs.getBoolean("flag_snapToEdge", true)) {
+                                val middleX = params.x + v.width / 2
+                                val snapLeft = edgeMargin
+                                val snapRight = screenWidth - v.width - edgeMargin
+                                params.x = if (middleX >= screenWidth / 2) snapRight else snapLeft
+                            }
                             windowManager.updateViewLayout(floatingView, params)
                         }
                     }

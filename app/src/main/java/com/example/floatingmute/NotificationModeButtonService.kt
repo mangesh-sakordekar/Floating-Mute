@@ -3,6 +3,7 @@ package com.example.floatingtools
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.PixelFormat
 import android.media.AudioManager
 import android.os.Build
@@ -17,6 +18,8 @@ class NotificationModeButtonService : Service() {
     private lateinit var modeIcon: ImageView
     private lateinit var audioManager: AudioManager
 
+    private lateinit var prefs: SharedPreferences
+
     override fun onCreate() {
         super.onCreate()
 
@@ -29,6 +32,8 @@ class NotificationModeButtonService : Service() {
         } else {
             WindowManager.LayoutParams.TYPE_PHONE
         }
+
+        prefs = getSharedPreferences("floating_notes", Context.MODE_PRIVATE)
 
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -137,10 +142,12 @@ class NotificationModeButtonService : Service() {
                         if (params.y > screenHeight - 150) {
                             stopSelf()
                         } else {
-                            val middleX = params.x + v.width / 2
-                            val snapLeft = edgeMargin
-                            val snapRight = screenWidth - v.width - edgeMargin
-                            params.x = if (middleX >= screenWidth / 2) snapRight else snapLeft
+                            if(prefs.getBoolean("flag_snapToEdge", true)) {
+                                val middleX = params.x + v.width / 2
+                                val snapLeft = edgeMargin
+                                val snapRight = screenWidth - v.width - edgeMargin
+                                params.x = if (middleX >= screenWidth / 2) snapRight else snapLeft
+                            }
                             windowManager.updateViewLayout(floatingView, params)
                         }
                     }

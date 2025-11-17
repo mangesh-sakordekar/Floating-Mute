@@ -8,12 +8,15 @@ import android.os.Build
 import android.view.*
 import android.widget.ImageView
 import androidx.core.app.NotificationCompat
+import android.content.SharedPreferences
 
 class DNDButtonService : Service() {
 
     private lateinit var windowManager: WindowManager
     private lateinit var floatingView: View
     private lateinit var modeIcon: ImageView
+
+    private lateinit var prefs: SharedPreferences
 
     override fun onCreate() {
         super.onCreate()
@@ -26,6 +29,8 @@ class DNDButtonService : Service() {
         } else {
             WindowManager.LayoutParams.TYPE_PHONE
         }
+
+        prefs = getSharedPreferences("floating_notes", Context.MODE_PRIVATE)
 
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -128,10 +133,12 @@ class DNDButtonService : Service() {
                         if (params.y > screenHeight - 150) {
                             stopSelf()
                         } else {
-                            val middleX = params.x + v.width / 2
-                            val snapLeft = edgeMargin
-                            val snapRight = screenWidth - v.width - edgeMargin
-                            params.x = if (middleX >= screenWidth / 2) snapRight else snapLeft
+                            if(prefs.getBoolean("flag_snapToEdge", true)) {
+                                val middleX = params.x + v.width / 2
+                                val snapLeft = edgeMargin
+                                val snapRight = screenWidth - v.width - edgeMargin
+                                params.x = if (middleX >= screenWidth / 2) snapRight else snapLeft
+                            }
                             windowManager.updateViewLayout(floatingView, params)
                         }
                     }

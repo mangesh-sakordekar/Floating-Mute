@@ -50,12 +50,347 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Settings values like button size, color, launch tools etc"
-                android:textSize="16sp"
-                android:padding="20dp"
+                android:text="🛠️ Preferences"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:paddingBottom="5dp"
                 android:textColor="@color/white"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="5">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Snap to the Edge"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Floating toggles will snap to the closest edge"
+                        android:textSize="10sp"
+                        android:textColor="#999999"/>
+
+                </LinearLayout>
+
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/snapToEdgeSwitch"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#444"
+                android:layout_marginHorizontal="75dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="5">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Launch Tool with the Toggle"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Associated tool will launch with the toggle"
+                        android:textSize="10sp"
+                        android:textColor="#999999"/>
+                </LinearLayout>
+
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/launchToolSwitch"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#999"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="25dp"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🔐 Permissions️"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:paddingBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="5">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Overlay Permission"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Allows Floating Tools to display over other apps"
+                        android:textSize="10sp"
+                        android:textColor="#999999"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Used By: All Services"
+                        android:textSize="10sp"
+                        android:textColor="#999999"/>
+                </LinearLayout>
+
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/overlaySwitch"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#444"
+                android:layout_marginHorizontal="75dp"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="5">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Write Settings Permission"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Allows Floating Tools to change the settings of the device"
+                        android:textSize="10sp"
+                        android:textColor="#999999"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Used By: Brightness Service and Font Size Service"
+                        android:textSize="10sp"
+                        android:textColor="#999999"/>
+                </LinearLayout>
+
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/writeSwitch"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#444"
+                android:layout_marginHorizontal="75dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="5">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Access Notification Policy Permission"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Allows Floating Tools to change alert modes of the device"
+                        android:textSize="10sp"
+                        android:textColor="#999999"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Used By: Alert Toggle Service and DND Service"
+                        android:textSize="10sp"
+                        android:textColor="#999999"/>
+                </LinearLayout>
+
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/notificationSwitch"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#444"
+                android:layout_marginHorizontal="75dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="5">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Camera Permission"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Allows Floating Tools to access cameras of the device"
+                        android:textSize="10sp"
+                        android:textColor="#999999"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Used By: Mirror Service"
+                        android:textSize="10sp"
+                        android:textColor="#999999"/>
+                </LinearLayout>
+
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/cameraSwitch"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#999"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="25dp"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🎨 Personalization"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:paddingBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tool Color, Text Color and Opacity controls coming soon..."
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Opacity"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"/>
+
+
+                <SeekBar
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:layout_gravity="center_vertical"/>
+
+
+
+            </LinearLayout>-->
         </LinearLayout>
     </ScrollView>
 

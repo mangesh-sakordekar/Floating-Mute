@@ -10,6 +10,7 @@ import android.os.IBinder
 import android.view.*
 import android.widget.ImageButton
 import androidx.core.app.NotificationCompat
+import android.content.SharedPreferences
 
 class FlashlightButtonService : Service() {
 
@@ -19,6 +20,8 @@ class FlashlightButtonService : Service() {
     private var isFlashOn = false
     private var cameraManager: CameraManager? = null
     private var cameraId: String? = null
+
+    private lateinit var prefs: SharedPreferences
 
 
     override fun onCreate() {
@@ -33,6 +36,8 @@ class FlashlightButtonService : Service() {
         } else {
             WindowManager.LayoutParams.TYPE_PHONE
         }
+
+        prefs = getSharedPreferences("floating_notes", Context.MODE_PRIVATE)
 
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -75,7 +80,10 @@ class FlashlightButtonService : Service() {
             e.printStackTrace()
         }
 
-        toggleFlashlight()
+        if(prefs.getBoolean("flag_launchTools", true)){
+            toggleFlashlight()
+        }
+
     }
 
     // -----------------------------
@@ -147,10 +155,12 @@ class FlashlightButtonService : Service() {
                             stopSelf()
                         }
                         else {
-                            val middleX = params.x + v.width / 2
-                            val snapLeft = edgeMargin
-                            val snapRight = screenWidth - v.width - edgeMargin
-                            params.x = if (middleX >= screenWidth / 2) snapRight else snapLeft
+                            if(prefs.getBoolean("flag_snapToEdge", true)) {
+                                val middleX = params.x + v.width / 2
+                                val snapLeft = edgeMargin
+                                val snapRight = screenWidth - v.width - edgeMargin
+                                params.x = if (middleX >= screenWidth / 2) snapRight else snapLeft
+                            }
                             windowManager.updateViewLayout(floatingView, params)
                         }
                     }

@@ -1,6 +1,7 @@
 package com.example.floatingtools
 
 import android.app.*
+import android.content.Context
 import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.Build
@@ -10,6 +11,7 @@ import android.view.*
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
+import android.content.SharedPreferences
 
 class BrightnessButtonService : Service() {
 
@@ -17,6 +19,8 @@ class BrightnessButtonService : Service() {
     private var floatingView: View? = null
     private var isDimmed = false
     private var originalBrightness: Float = 1.0f
+
+    private lateinit var prefs: SharedPreferences
 
     override fun onCreate() {
         super.onCreate()
@@ -30,6 +34,8 @@ class BrightnessButtonService : Service() {
         } else {
             WindowManager.LayoutParams.TYPE_PHONE
         }
+
+        prefs = getSharedPreferences("floating_notes", Context.MODE_PRIVATE)
 
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -143,10 +149,12 @@ class BrightnessButtonService : Service() {
                         }
                         else {
                             // Snap to nearest horizontal edge
-                            val middleX = params.x + v.width / 2
-                            val snapLeft = edgeMargin
-                            val snapRight = screenWidth - v.width - edgeMargin
-                            params.x = if (middleX >= screenWidth / 2) snapRight else snapLeft
+                            if(prefs.getBoolean("flag_snapToEdge", true)) {
+                                val middleX = params.x + v.width / 2
+                                val snapLeft = edgeMargin
+                                val snapRight = screenWidth - v.width - edgeMargin
+                                params.x = if (middleX >= screenWidth / 2) snapRight else snapLeft
+                            }
                             windowManager.updateViewLayout(floatingView, params)
                         }
                     }
