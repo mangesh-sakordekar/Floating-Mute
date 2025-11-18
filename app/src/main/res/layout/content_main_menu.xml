@@ -186,7 +186,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="© 2025 Floating Tools "
+                android:text="© 2025 Floating Tools"
                 android:textSize="10dp"
                 android:textColor="#999999"
                 android:gravity="center"/>

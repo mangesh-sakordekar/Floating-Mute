@@ -66,21 +66,36 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Version 2.2"
+                android:text="Version 2.2\n© 2025 Floating Tools"
                 android:textSize="10sp"
                 android:paddingBottom="50dp"
                 android:textColor="#999999"
                 android:gravity="center"/>
 
             <TextView
+                android:id="@+id/txtAAAboutApp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Floating tools description"
                 android:textSize="16sp"
                 android:padding="20dp"
                 android:textColor="@color/white"/>
 
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Upcoming Features:"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:paddingHorizontal="20dp"
+                android:textColor="@color/white"/>
+            <TextView
+                android:id="@+id/txtAAUpcomingFeatures"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:paddingStart="40dp"
+                android:paddingEnd="20dp"
+                android:textColor="@color/white"/>
         </LinearLayout>
     </ScrollView>
 

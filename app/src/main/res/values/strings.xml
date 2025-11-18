@@ -42,4 +42,23 @@
         <b>Sticky Notes:</b> Launches new sticky note to the screen.<br/>
         <b>Screenshot:</b> Takes a screenshot.]]>
     </string>
+
+    <string name="about_app">
+        <![CDATA[
+        <b>Floating Tools</b> provides quick access floating tools that you can use from anywhere on your phone.
+        Each tool appears as a movable toggle on your screen, letting you perform actions instantly
+        without switching apps. You can enable or disable any tool with a single tap, and the app
+        clearly shows which permissions are needed for each feature.<br/><br/>
+        Once activated, the toggles stay accessible across all apps, making tasks like calculations,
+        notes, or screen actions faster and easier. You can stop individual tools by tapping their
+        buttons or dragging them to the bottom of the screen, or close everything at once using the
+        Stop button. The app is designed to be simple, efficient, and always within reach.]]>
+    </string>
+
+    <string name="about_app_future">
+        <![CDATA[
+        • Customizing tool colors and looks <br/>
+        • Diary option to locally save notepad contents<br/>
+        • Floating Dock for cleaner user experience]]>
+    </string>
 </resources>

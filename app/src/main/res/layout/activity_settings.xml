@@ -367,7 +367,8 @@
                 android:layout_height="wrap_content"
                 android:text="Tool Color, Text Color and Opacity controls coming soon..."
                 android:textColor="@color/white"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:paddingHorizontal="10dp"/>
             <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

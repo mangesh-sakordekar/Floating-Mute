@@ -2,6 +2,7 @@ package com.example.floatingtools
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
 import com.example.floatingtools.databinding.ActivityAboutAppBinding
 
 class AboutAppActivity : AppCompatActivity() {
@@ -23,6 +24,13 @@ class AboutAppActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
+        val txt_about_app = getString(R.string.about_app)
+        val launching_text  = HtmlCompat.fromHtml(txt_about_app, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        binding.txtAAAboutApp.text = launching_text
+
+        val txt_upcoming_features = getString(R.string.about_app_future)
+        val feature_text  = HtmlCompat.fromHtml(txt_upcoming_features, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        binding.txtAAUpcomingFeatures.text = feature_text
         // You can also dynamically set the text here if needed
     }
 }
