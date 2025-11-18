@@ -50,12 +50,88 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="LinkedIn Email etc"
-                android:textSize="16sp"
+                android:text="@string/contact_us"
+                android:textSize="18sp"
                 android:padding="20dp"
                 android:textColor="@color/white"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Get In Touch!"
+                android:textSize="18sp"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="20dp"
+                android:textColor="@color/white"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imgMail"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_gmail"
+                    android:paddingHorizontal="20dp"
+                    android:layout_marginHorizontal="10dp"/>
+
+                <ImageView
+                    android:id="@+id/imgLinkedIn"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_linkedin"
+                    android:paddingHorizontal="20dp"
+                    android:layout_marginHorizontal="10dp"/>
+
+                <ImageView
+                    android:id="@+id/imgInstagram"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_instagram"
+                    android:paddingHorizontal="20dp"
+                    android:layout_marginHorizontal="10dp"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Releases and Source Code"
+                android:textSize="18sp"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="20dp"
+                android:textColor="@color/white"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_google_play"
+                    android:paddingHorizontal="20dp"
+                    android:layout_marginHorizontal="10dp"/>
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_fdroid"
+                    android:paddingHorizontal="20dp"
+                    android:layout_marginHorizontal="10dp"/>
+
+                <ImageView
+                    android:id="@+id/imgGithub"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_github"
+                    android:paddingHorizontal="20dp"
+                    android:layout_marginHorizontal="10dp"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

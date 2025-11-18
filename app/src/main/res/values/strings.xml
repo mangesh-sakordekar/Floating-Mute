@@ -63,4 +63,14 @@
         • Diary option to locally save notepad contents<br/>
         • Floating Dock for cleaner user experience]]>
     </string>
+    <string name="about_app_foss">
+        Floating Tools is a Free and Open Source Software. An ad-free version of this app will be
+        available on F-Droid app store. We encourage you to explore open source software and
+        support developers!
+    </string>
+    <string name="contact_us">
+        Feel free to reach out to us with any feedback, bug reports and suggestions, or just drop a
+        message to say hi! If you are a developer and want to contribute to the project, we
+        encourage you to check out our Github repository.
+    </string>
 </resources>

@@ -369,6 +369,15 @@
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:paddingHorizontal="10dp"/>
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/img_wip"
+                android:paddingTop="0dp"
+                android:paddingBottom="5dp"
+                android:layout_gravity="center"/>
+
             <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
