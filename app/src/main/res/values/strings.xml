@@ -2,6 +2,8 @@
     <string name="app_name">Floating Tools</string>
     <string name="stop">Stop</string>
     <string name="start">Start</string>
+    <string name="version">Version 2.5</string>
+    <string name="copyright">© 2025 Floating Tools</string>
     <string name="how_to_use_layout">
         Top row buttons shows the permissions required. Buttons to launch the tools occupy rest of
         the area. The Stop (red) Button is at the bottom right corner.

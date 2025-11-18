@@ -169,7 +169,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Floating Tools"
+                android:text="@string/app_name"
                 android:textSize="20dp"
                 android:paddingBottom="1dp"
                 android:textColor="@color/white"
@@ -178,7 +178,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Version 2.2"
+                android:text="@string/version"
                 android:textSize="10dp"
                 android:textColor="#999999"
                 android:gravity="center"/>
@@ -186,7 +186,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="© 2025 Floating Tools"
+                android:text="@string/copyright"
                 android:textSize="10dp"
                 android:textColor="#999999"
                 android:gravity="center"/>

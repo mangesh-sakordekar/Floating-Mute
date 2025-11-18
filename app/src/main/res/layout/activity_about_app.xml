@@ -57,7 +57,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Floating Tools"
+                android:text="@string/app_name"
                 android:textSize="16sp"
                 android:paddingBottom="1dp"
                 android:textColor="@color/white"
@@ -66,7 +66,16 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Version 2.2\n© 2025 Floating Tools"
+                android:text="@string/version"
+                android:textSize="10sp"
+                android:paddingBottom="1dp"
+                android:textColor="#999999"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/copyright"
                 android:textSize="10sp"
                 android:paddingBottom="50dp"
                 android:textColor="#999999"
