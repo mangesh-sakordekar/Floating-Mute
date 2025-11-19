@@ -39,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@id/contactUsToolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/contactUsAdView"
         android:padding="16dp">
 
         <LinearLayout
@@ -135,4 +135,15 @@
         </LinearLayout>
     </ScrollView>
 
+    <!-- 🔹 Ad Banner (if using) -->
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/contactUsAdView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#00000000"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-5342403354416426/8136388772"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

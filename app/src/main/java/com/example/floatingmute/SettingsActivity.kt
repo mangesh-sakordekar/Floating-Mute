@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.floatingtools.databinding.ActivitySettingsBinding
 import android.content.SharedPreferences
+import com.google.android.gms.ads.AdRequest
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -112,6 +113,9 @@ class SettingsActivity : AppCompatActivity() {
         snapToEdgeSwitch.setOnCheckedChangeListener { _, isChecked ->
             prefs.edit().putBoolean("flag_snapToEdge", isChecked).apply()
         }
+
+        val adRequest = AdRequest.Builder().build()
+        binding.settingsAdView.loadAd(adRequest)
     }
 
     override fun onResume() {

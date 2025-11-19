@@ -5,12 +5,14 @@
     <string name="version">Version 2.5</string>
     <string name="copyright">© 2025 Floating Tools</string>
     <string name="how_to_use_layout">
-        Top row buttons shows the permissions required. Buttons to launch the tools occupy rest of
-        the area. The Stop (red) Button is at the bottom right corner.
+        The home screen contains buttons to launch the tools. The Stop (red) Button is at the bottom
+        right corner. The menu button in to the top right corner. The menu contains How to Use,
+        About App, Contact Us and Settings options. On the Settings screen you get options to change
+        preferences and give permissions to the app.
     </string>
     <string name="how_to_use_permissions">
-        Click the permission buttons to grant the permission. Once it is granted the
-        button will turn green!
+        In the Settings screen, click on the toggles to grant the permission. Once it is granted the
+        toggle will be disabled. You can revoke the permissions through phone settings.
     </string>
     <string name="how_to_use_launching">
         <![CDATA[

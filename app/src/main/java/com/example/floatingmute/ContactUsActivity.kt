@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.floatingtools.databinding.ActivityContactUsBinding
 import android.content.Intent
 import android.net.Uri
+import com.google.android.gms.ads.AdRequest
 
 class ContactUsActivity : AppCompatActivity() {
 
@@ -47,6 +48,9 @@ class ContactUsActivity : AppCompatActivity() {
         binding.imgMail.setOnClickListener {
             openUrlInBrowser(mailUrl)
         }
+
+        val adRequest = AdRequest.Builder().build()
+        binding.contactUsAdView.loadAd(adRequest)
     }
 
     private fun openUrlInBrowser(url: String) {

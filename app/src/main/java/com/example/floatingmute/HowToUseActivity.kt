@@ -5,6 +5,7 @@ import android.text.Html
 import androidx.core.text.HtmlCompat
 import androidx.appcompat.app.AppCompatActivity
 import com.example.floatingtools.databinding.ActivityHowToUseBinding
+import com.google.android.gms.ads.AdRequest
 
 class HowToUseActivity : AppCompatActivity() {
 
@@ -34,5 +35,8 @@ class HowToUseActivity : AppCompatActivity() {
         val txt_tools_guide = getString(R.string.how_to_use_tools)
         val tools_text  = HtmlCompat.fromHtml(txt_tools_guide, HtmlCompat.FROM_HTML_MODE_LEGACY)
         binding.txtHTUTools.text = tools_text
+
+        val adRequest = AdRequest.Builder().build()
+        binding.howToUseAdView.loadAd(adRequest)
     }
 }

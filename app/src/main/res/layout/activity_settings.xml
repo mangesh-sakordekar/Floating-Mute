@@ -39,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@id/settingsToolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/settingsAdView"
         android:padding="16dp">
 
         <LinearLayout
@@ -403,5 +403,17 @@
             </LinearLayout>-->
         </LinearLayout>
     </ScrollView>
+
+    <!-- 🔹 Ad Banner (if using) -->
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/settingsAdView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#00000000"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-5342403354416426/1052105670"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
