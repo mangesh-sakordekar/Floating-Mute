@@ -6,11 +6,7 @@ Mirror, and more. These tools appear as movable bubbles on your screen,
 allowing you to use them from any app without interruption.
 
 ## Screenshots
-<img src="./screenshots/FloatingTools.jpg" alt="Home" height="250">
-<img src="./screenshots/FloatingTools_Menu.jpg" alt="Menu" height="250">
-<img src="./screenshots/FloatingTools_Settings.jpg" alt="Settings" height="250">
-<img src="./screenshots/FloatingTools_AllTools.jpg" alt="All Tools" height="250">
-<img src="./screenshots/FloatingTools_MAFA.jpg" alt="MAFA" height="250">
+<img src="./screenshots/FloatingTools.jpg" alt="Home" height="400"> <img src="./screenshots/FloatingTools_Menu.jpg" alt="Menu" height="400"> <img src="./screenshots/FloatingTools_Settings.jpg" alt="Settings" height="400"> <img src="./screenshots/FloatingTools_AllTools.jpg" alt="All Tools" height="400"> <img src="./screenshots/FloatingTools_MAFA.jpg" alt="MAFA" height="400">
 
 ## Features
 
