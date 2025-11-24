@@ -131,7 +131,7 @@ class ScreenOnButtonService : Service() {
                     if (kotlin.math.abs(totalDx) < clickThreshold && kotlin.math.abs(totalDy) < clickThreshold) {
                         toggleMode() // treat as click
                     } else {
-                        if (params.y > screenHeight - 150) {
+                        if (prefs.getBoolean("flag_bottomEdge", true) && params.y > screenHeight - 250) {
                             stopSelf()
                         } else {
                             if(prefs.getBoolean("flag_snapToEdge", true)) {

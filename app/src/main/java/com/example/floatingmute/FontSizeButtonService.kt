@@ -143,7 +143,7 @@ class FontSizeButtonService : Service() {
                         toggleFontSize()
                     } else {
 
-                        if (params.y > screenHeight - 150){
+                        if (prefs.getBoolean("flag_bottomEdge", true) && params.y > screenHeight - 250){
                             stopSelf()
                         }
                         else {

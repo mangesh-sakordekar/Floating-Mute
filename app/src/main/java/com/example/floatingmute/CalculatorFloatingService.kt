@@ -128,6 +128,7 @@ class CalculatorFloatingService : Service() {
             return
         }
 
+        computeResult()
         if (firstOperand == null) {
             // set first operand
             firstOperand = currentInput.takeIf { it.isNotEmpty() }?.toDouble() ?: 0.0

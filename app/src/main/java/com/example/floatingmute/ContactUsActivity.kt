@@ -12,10 +12,14 @@ class ContactUsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityContactUsBinding
 
     private val linkedInURL = "https://www.linkedin.com/in/mangesh-sakordekar/"
-    private val instagramURL = "https://www.instagram.com/hazardous._10/"
+    private val instagramURL = "https://www.instagram.com/panda.devs/"
     private val githubURL = "https://github.com/mangesh-sakordekar/Floating-Mute"
 
-    private val mailUrl = "mailto:mangeshsakordekar@gmail.com?subject=Floating%20Tools%20Feedback"
+    private val mailURL = "mailto:pandadevs.apps@gmail.com?subject=Floating%20Tools%20Feedback"
+
+    private val playStoreURL = "https://play.google.com/"
+
+    private val fdroidURL = "https://f-droid.org/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +50,15 @@ class ContactUsActivity : AppCompatActivity() {
         }
 
         binding.imgMail.setOnClickListener {
-            openUrlInBrowser(mailUrl)
+            openUrlInBrowser(mailURL)
+        }
+
+        binding.imgGPlay.setOnClickListener {
+            openUrlInBrowser(playStoreURL)
+        }
+
+        binding.imgFDroid.setOnClickListener {
+            openUrlInBrowser(fdroidURL)
         }
 
         val adRequest = AdRequest.Builder().build()

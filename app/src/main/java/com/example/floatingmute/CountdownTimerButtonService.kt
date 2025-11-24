@@ -270,7 +270,7 @@ class CountdownTimerButtonService : Service() {
                             // Small movement → treat as click
                             toggleStopwatch()
                         } else {
-                            if (params.y > screenHeight - 150) {
+                            if (prefs.getBoolean("flag_bottomEdge", true) && params.y > screenHeight - 250) {
                                 stopSelf()
                             } else {
                                 if(prefs.getBoolean("flag_snapToEdge", true)) {

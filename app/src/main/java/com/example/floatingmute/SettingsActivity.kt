@@ -59,6 +59,9 @@ class SettingsActivity : AppCompatActivity() {
         val snapToEdgeSwitch = findViewById<Switch>(R.id.snapToEdgeSwitch)
         snapToEdgeSwitch.isChecked = prefs.getBoolean("flag_snapToEdge", true)
 
+        val bottomEdgeSwitch = findViewById<Switch>(R.id.bottomEdgeSwitch)
+        bottomEdgeSwitch.isChecked = prefs.getBoolean("flag_bottomEdge", true)
+
         updateSwitch(overlaySwitch, Settings.canDrawOverlays(this))
         updateSwitch(writeSwitch, Settings.System.canWrite(this))
 
@@ -112,6 +115,10 @@ class SettingsActivity : AppCompatActivity() {
 
         snapToEdgeSwitch.setOnCheckedChangeListener { _, isChecked ->
             prefs.edit().putBoolean("flag_snapToEdge", isChecked).apply()
+        }
+
+        bottomEdgeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            prefs.edit().putBoolean("flag_bottomEdge", isChecked).apply()
         }
 
         val adRequest = AdRequest.Builder().build()

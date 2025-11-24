@@ -151,7 +151,7 @@ class FlashlightButtonService : Service() {
                         toggleFlashlight()
                     } else {
                         // Snap to nearest horizontal edge
-                        if (params.y > screenHeight - 150){
+                        if (prefs.getBoolean("flag_bottomEdge", true) && params.y > screenHeight - 250){
                             stopSelf()
                         }
                         else {
