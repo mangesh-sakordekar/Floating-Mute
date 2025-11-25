@@ -45,14 +45,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
             <ImageView
-                android:layout_width="match_parent"
+                android:id="@+id/AAAppIcon"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_appicon"
-                android:paddingTop="50dp"
-                android:paddingBottom="10dp"/>
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"

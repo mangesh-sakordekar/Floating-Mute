@@ -80,4 +80,22 @@
         but you can grant all permissions anytime from your app settings and revoke them from device
         settings.
     </string>
+
+    <string name="acknowledgements">
+        <![CDATA[
+        Ranjun Singh <br/><br/>
+        Vedang Gaonkar <br/><br/>
+        Saahil Sakordekar <br/><br/>
+        Nandan Sakordekar <br/><br/>
+        Divya Prabhu <br/><br/>
+        <br/><br/>
+        <b>Emotional Support Crew</b><br/><br/>
+        Laila (Evil Cat) <br/><br/>
+        Simba (Good Cat) <br/><br/>
+        Panda (Good Puppy) <br/><br/>
+        <br/><br/>
+        <b>AI Tools</b><br/><br/>
+        ChatGPT <br/><br/>
+        Gemini <br/>]]>
+    </string>
 </resources>

@@ -1,6 +1,10 @@
 package com.example.floatingtools
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import com.example.floatingtools.databinding.ActivityAboutAppBinding
@@ -25,6 +29,8 @@ class AboutAppActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
+        binding.AAAppIcon.setOnClickListener { showDialog() }
+
         val txt_about_app = getString(R.string.about_app)
         val launching_text  = HtmlCompat.fromHtml(txt_about_app, HtmlCompat.FROM_HTML_MODE_LEGACY)
         binding.txtAAAboutApp.text = launching_text
@@ -38,4 +44,20 @@ class AboutAppActivity : AppCompatActivity() {
         binding.aboutAppAdView.loadAd(adRequest)
     }
 
+    private fun showDialog() {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_acknowledgement, null)
+
+        val dialog = AlertDialog.Builder(this, android.R.style.Theme_Material_Light_Dialog_NoActionBar)
+            .setView(dialogView)
+            .create()
+
+        val txt_acks = getString(R.string.acknowledgements)
+        val ack_text  = HtmlCompat.fromHtml(txt_acks, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        dialogView.findViewById<TextView>(R.id.ackText).text = ack_text
+        dialog.window?.setBackgroundDrawableResource(R.drawable.floating_calculator_bg)
+
+        dialogView.findViewById<TextView>(R.id.ackDone).setOnClickListener { dialog.dismiss() }
+
+        dialog.show()
+    }
 }

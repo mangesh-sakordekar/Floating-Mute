@@ -58,3 +58,4 @@ productivity and fun app.
 - Added pandadev icons and links
 - Minor update to the app icon
 - Added dialog box to handle first launch of the app
+- Added acknowledgements
