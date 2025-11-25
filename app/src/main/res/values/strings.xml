@@ -75,4 +75,9 @@
         message to say hi! If you are a developer and want to contribute to the project, we
         encourage you to check out our Github repository.
     </string>
+    <string name="first_launch">
+        Floating Tools needs certain permissions to work correctly. Overlay permission is essential,
+        but you can grant all permissions anytime from your app settings and revoke them from device
+        settings.
+    </string>
 </resources>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="10dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/ic_appicon"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome!!"
+            android:paddingStart="10dp"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/first_launch"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444"
+        android:layout_marginVertical="2dp"
+        android:layout_marginHorizontal="15dp"/>
+
+    <TextView
+        android:id="@+id/flOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Overlay Permission"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444"
+        android:layout_marginVertical="2dp"
+        android:layout_marginHorizontal="15dp"/>
+
+    <TextView
+        android:id="@+id/flWrite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Write Settings Permission"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444"
+        android:layout_marginVertical="2dp"
+        android:layout_marginHorizontal="15dp"/>
+
+    <TextView
+        android:id="@+id/flDND"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Notification Policy Permission"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#444"
+        android:layout_marginVertical="2dp"
+        android:layout_marginHorizontal="15dp"/>
+
+    <TextView
+        android:id="@+id/flCamera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Camera Permission"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/flLearnMore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Learn More"
+            android:padding="12dp"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginHorizontal="1dp"
+            android:background="@drawable/row_background"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/flDone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Done!"
+            android:padding="12dp"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_marginHorizontal="1dp"
+            android:background="@drawable/row_background"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -3,6 +3,7 @@ package com.example.floatingtools
 import android.Manifest
 import android.app.Activity
 import android.app.ActivityManager
+import android.app.AlertDialog
 import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -24,8 +25,13 @@ import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import android.content.IntentFilter
+import android.content.SharedPreferences
+import android.os.Build
+import android.view.LayoutInflater
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.NumberPicker
 
 
 class MainActivity : AppCompatActivity() {
@@ -41,12 +47,13 @@ class MainActivity : AppCompatActivity() {
 
     private var isMenuOpen = false
 
+    private lateinit var prefs: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+        prefs = getSharedPreferences("floating_notes", Context.MODE_PRIVATE)
 
         val startMuteButton = findViewById<LinearLayout>(R.id.muteText)
 
@@ -446,8 +453,35 @@ class MainActivity : AppCompatActivity() {
             loadBannerAd()
         }
 
+        if(prefs.getBoolean("flag_firstLaunch", true)){
+            showDialog()
+            prefs.edit().putBoolean("flag_firstLaunch", false).apply()
+        }
+
     }
 
+    private fun showDialog() {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dailog_first_launch, null)
+        dialogView.findViewById<TextView>(R.id.flOverlay).setOnClickListener { requestOverlayPermission() }
+        dialogView.findViewById<TextView>(R.id.flWrite).setOnClickListener { checkAndRequestWriteSettings() }
+        dialogView.findViewById<TextView>(R.id.flDND).setOnClickListener { changeDoNotDisturbState() }
+        dialogView.findViewById<TextView>(R.id.flCamera).setOnClickListener { requestCameraPermission() }
+
+        val dialog = AlertDialog.Builder(this, android.R.style.Theme_Material_Light_Dialog_NoActionBar)
+            .setView(dialogView)
+            .create()
+
+        dialog.window?.setBackgroundDrawableResource(R.drawable.floating_calculator_bg)
+
+        dialogView.findViewById<TextView>(R.id.flDone).setOnClickListener { dialog.dismiss() }
+        dialogView.findViewById<TextView>(R.id.flLearnMore).setOnClickListener {
+            dialog.dismiss()
+            val intent = Intent(this, HowToUseActivity::class.java)
+            startActivity(intent)
+        }
+
+        dialog.show()
+    }
     private val serviceDestroyedReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent?.action == "SERVICE_DESTROYED") {

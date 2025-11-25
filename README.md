@@ -49,10 +49,12 @@ productivity and fun app.
 - Diary option which will gather and save your notes at the end of the day
 - Floating Dock to aggregate the tools for easier access
 
-### Changelogs v2.5.1
+## Changelogs v2.5.1
+
 - Fixed calculator bug, can handle multiple operations now
 - Fixed text wrap and cutoff margins
 - Increased the area of bottom edge deletion zone
 - Added option in settings to disable the deletion zone
 - Added pandadev icons and links
 - Minor update to the app icon
+- Added dialog box to handle first launch of the app

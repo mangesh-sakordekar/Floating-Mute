@@ -128,7 +128,6 @@ class CalculatorFloatingService : Service() {
             return
         }
 
-        computeResult()
         if (firstOperand == null) {
             // set first operand
             firstOperand = currentInput.takeIf { it.isNotEmpty() }?.toDouble() ?: 0.0
@@ -138,6 +137,8 @@ class CalculatorFloatingService : Service() {
             // if operator pressed after having firstOperand, compute intermediate result if input present
             if (currentInput.isNotEmpty()) {
                 computeResult()
+                firstOperand = currentInput.takeIf { it.isNotEmpty() }?.toDouble() ?: 0.0
+                currentInput = ""
                 currentOperator = op
             } else {
                 currentOperator = op
