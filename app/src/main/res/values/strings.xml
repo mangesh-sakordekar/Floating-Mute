@@ -2,7 +2,7 @@
     <string name="app_name">Floating Tools</string>
     <string name="stop">Stop</string>
     <string name="start">Start</string>
-    <string name="version">Version 2.5.5</string>
+    <string name="version">Version 2.6.0</string>
     <string name="copyright">© 2025 pandadevs</string>
     <string name="how_to_use_layout">
         The home screen contains buttons to launch the tools. The Stop (red) Button is at the bottom
