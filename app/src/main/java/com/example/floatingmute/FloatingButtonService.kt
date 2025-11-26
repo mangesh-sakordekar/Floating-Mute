@@ -11,6 +11,7 @@ import android.os.IBinder
 import android.view.*
 import android.widget.ImageButton
 import androidx.core.app.NotificationCompat
+import com.example.floatingmute.VolumeObserver
 
 class FloatingButtonService : Service() {
 
@@ -21,6 +22,8 @@ class FloatingButtonService : Service() {
     private var previousVolume = 0
 
     private lateinit var prefs: SharedPreferences
+
+    private var volumeObserver: VolumeObserver? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -45,6 +48,16 @@ class FloatingButtonService : Service() {
             PixelFormat.TRANSLUCENT
         )
 
+        volumeObserver = VolumeObserver(this) { newVolume ->
+            handleExternalVolumeChange(newVolume)
+        }
+
+        contentResolver.registerContentObserver(
+            android.provider.Settings.System.CONTENT_URI,
+            true,
+            volumeObserver!!
+        )
+
         params.gravity = Gravity.TOP or Gravity.START
         params.x = dpToPx(0)
         params.y = dpToPx(60)
@@ -62,6 +75,23 @@ class FloatingButtonService : Service() {
         enableDragAndSnap(button, params)
 
         startForegroundService()
+    }
+
+    private fun handleExternalVolumeChange(newVolume: Int) {
+        val button = floatingView?.findViewById<ImageButton>(R.id.muteButton) ?: return
+
+        if (newVolume == 0 && !isMuted) {
+            // Another app muted the volume
+            isMuted = true
+            button.setImageResource(R.drawable.ic_mute)
+            previousVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        }
+        else if (newVolume > 0 && isMuted) {
+            // Another app increased volume → unmute
+            isMuted = false
+            button.setImageResource(R.drawable.ic_unmute)
+            previousVolume = newVolume
+        }
     }
 
     // -----------------------------
@@ -181,6 +211,10 @@ class FloatingButtonService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         floatingView?.let { windowManager.removeView(it) }
+
+        volumeObserver?.let {
+            contentResolver.unregisterContentObserver(it)
+        }
 
         // Send a broadcast to MainActivity
         val intent = Intent("SERVICE_DESTROYED")
