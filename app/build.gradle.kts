@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    namespace = "com.example.floatingtools"
+    namespace = "com.pandadevs.floatingtools"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.floatingtools"
+        applicationId = "com.pandadevs.floatingtools"
         minSdk = 26
         targetSdk = 36
         versionCode = 1
-        versionName = "1.0"
+        versionName = "2.6.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

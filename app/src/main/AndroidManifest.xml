@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-package="com.example.floatingtools"
+package="com.pandadevs.floatingtools"
 xmlns:tools="http://schemas.android.com/tools">
 
     <uses-feature
@@ -33,7 +33,7 @@ xmlns:tools="http://schemas.android.com/tools">
 
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.pandadevs.floatingtools.MainActivity"
             android:theme="@style/Theme.FloatingMute"
             android:exported="true">
             <intent-filter>
@@ -49,7 +49,7 @@ xmlns:tools="http://schemas.android.com/tools">
             android:value="ca-app-pub-5342403354416426~4936069504"/>
 
         <service
-            android:name=".FloatingButtonService"
+            android:name="com.pandadevs.floatingtools.FloatingButtonService"
             android:foregroundServiceType="specialUse"
             android:enabled="true"
             android:exported="false"
@@ -60,7 +60,7 @@ xmlns:tools="http://schemas.android.com/tools">
         </service>
 
         <service
-            android:name=".ScreenshotButtonService"
+            android:name="com.pandadevs.floatingtools.ScreenshotButtonService"
             android:foregroundServiceType="mediaProjection"
             android:enabled="true"
             android:exported="false"
@@ -69,7 +69,7 @@ xmlns:tools="http://schemas.android.com/tools">
 
 
         <service
-            android:name=".BrightnessButtonService"
+            android:name="com.pandadevs.floatingtools.BrightnessButtonService"
             android:foregroundServiceType="specialUse"
             android:enabled="true"
             android:exported="false"
@@ -80,7 +80,7 @@ xmlns:tools="http://schemas.android.com/tools">
         </service>
 
         <service
-            android:name=".FlashlightButtonService"
+            android:name="com.pandadevs.floatingtools.FlashlightButtonService"
             android:foregroundServiceType="specialUse"
             android:enabled="true"
             android:exported="false"
@@ -91,7 +91,7 @@ xmlns:tools="http://schemas.android.com/tools">
         </service>
 
         <service
-            android:name=".StopwatchButtonService"
+            android:name="com.pandadevs.floatingtools.StopwatchButtonService"
             android:foregroundServiceType="specialUse"
             android:enabled="true"
             android:exported="false"
@@ -102,7 +102,7 @@ xmlns:tools="http://schemas.android.com/tools">
         </service>
 
         <service
-            android:name=".NotificationModeButtonService"
+            android:name="com.pandadevs.floatingtools.NotificationModeButtonService"
             android:foregroundServiceType="specialUse"
             android:enabled="true"
             android:exported="false"
@@ -113,7 +113,7 @@ xmlns:tools="http://schemas.android.com/tools">
         </service>
 
         <service
-            android:name=".DNDButtonService"
+            android:name="com.pandadevs.floatingtools.DNDButtonService"
             android:foregroundServiceType="specialUse"
             android:enabled="true"
             android:exported="false"
@@ -124,7 +124,7 @@ xmlns:tools="http://schemas.android.com/tools">
         </service>
 
         <service
-            android:name=".ScreenOnButtonService"
+            android:name="com.pandadevs.floatingtools.ScreenOnButtonService"
             android:foregroundServiceType="specialUse"
             android:enabled="true"
             android:exported="false"
@@ -135,7 +135,7 @@ xmlns:tools="http://schemas.android.com/tools">
         </service>
 
         <service
-            android:name=".CountdownTimerButtonService"
+            android:name="com.pandadevs.floatingtools.CountdownTimerButtonService"
             android:foregroundServiceType="specialUse"
             android:enabled="true"
             android:exported="false"
@@ -146,7 +146,7 @@ xmlns:tools="http://schemas.android.com/tools">
         </service>
 
         <service
-            android:name=".MirrorFloatingService"
+            android:name="com.pandadevs.floatingtools.MirrorFloatingService"
             android:foregroundServiceType="specialUse"
             android:enabled="true"
             android:exported="false"
@@ -157,7 +157,7 @@ xmlns:tools="http://schemas.android.com/tools">
         </service>
 
         <service
-            android:name=".CalculatorFloatingService"
+            android:name="com.pandadevs.floatingtools.CalculatorFloatingService"
             android:foregroundServiceType="specialUse"
             android:enabled="true"
             android:exported="false"
@@ -168,7 +168,7 @@ xmlns:tools="http://schemas.android.com/tools">
         </service>
 
         <service
-            android:name=".CalculatorButtonService"
+            android:name="com.pandadevs.floatingtools.CalculatorButtonService"
             android:foregroundServiceType="specialUse"
             android:enabled="true"
             android:exported="false"
@@ -179,7 +179,7 @@ xmlns:tools="http://schemas.android.com/tools">
         </service>
 
         <service
-            android:name=".FontSizeButtonService"
+            android:name="com.pandadevs.floatingtools.FontSizeButtonService"
             android:foregroundServiceType="specialUse"
             android:enabled="true"
             android:exported="false"
@@ -190,7 +190,7 @@ xmlns:tools="http://schemas.android.com/tools">
         </service>
 
         <service
-            android:name=".FloatingNotesService"
+            android:name="com.pandadevs.floatingtools.FloatingNotesService"
             android:foregroundServiceType="specialUse"
             android:enabled="true"
             android:exported="false"
@@ -201,7 +201,7 @@ xmlns:tools="http://schemas.android.com/tools">
         </service>
 
         <service
-            android:name=".NotepadButtonService"
+            android:name="com.pandadevs.floatingtools.NotepadButtonService"
             android:foregroundServiceType="specialUse"
             android:enabled="true"
             android:exported="false"
@@ -212,7 +212,7 @@ xmlns:tools="http://schemas.android.com/tools">
         </service>
 
         <service
-            android:name=".StickyNotesService"
+            android:name="com.pandadevs.floatingtools.StickyNotesService"
             android:foregroundServiceType="specialUse"
             android:enabled="true"
             android:exported="false"
@@ -223,7 +223,7 @@ xmlns:tools="http://schemas.android.com/tools">
         </service>
 
         <service
-            android:name=".StickyNotesButtonService"
+            android:name="com.pandadevs.floatingtools.StickyNotesButtonService"
             android:foregroundServiceType="specialUse"
             android:enabled="true"
             android:exported="false"
@@ -234,19 +234,19 @@ xmlns:tools="http://schemas.android.com/tools">
         </service>
 
 
-        <activity android:name=".HowToUseActivity"
+        <activity android:name="com.pandadevs.floatingtools.HowToUseActivity"
             android:exported="false"
             android:theme="@style/Theme.FloatingTools.HowToUse"/>
 
-        <activity android:name=".AboutAppActivity"
+        <activity android:name="com.pandadevs.floatingtools.AboutAppActivity"
             android:exported="false"
             android:theme="@style/Theme.FloatingTools.HowToUse"/>
 
-        <activity android:name=".ContactUsActivity"
+        <activity android:name="com.pandadevs.floatingtools.ContactUsActivity"
             android:exported="false"
             android:theme="@style/Theme.FloatingTools.HowToUse"/>
 
-        <activity android:name=".SettingsActivity"
+        <activity android:name="com.pandadevs.floatingtools.SettingsActivity"
             android:exported="false"
             android:theme="@style/Theme.FloatingTools.HowToUse"/>
 

@@ -49,9 +49,6 @@ productivity and fun app.
 - Diary option which will gather and save your notes at the end of the day
 - Floating Dock to aggregate the tools for easier access
 
-## Changelogs v2.5.5
+## Changelogs v2.6.0
 
-- Fixed acknowledgement dialog bug
-- Added functionality to track external volume change
-- Added functionality to track external ringer mode change
-- Added functionality to track external dnd mode change
+- Changed package name, will register as a new app
