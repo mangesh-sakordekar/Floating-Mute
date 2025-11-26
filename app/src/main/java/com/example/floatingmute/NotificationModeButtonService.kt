@@ -10,6 +10,7 @@ import android.os.Build
 import android.view.*
 import android.widget.ImageView
 import androidx.core.app.NotificationCompat
+import com.example.floatingmute.RingerModeObserver
 
 class NotificationModeButtonService : Service() {
 
@@ -19,6 +20,8 @@ class NotificationModeButtonService : Service() {
     private lateinit var audioManager: AudioManager
 
     private lateinit var prefs: SharedPreferences
+
+    private lateinit var ringerObserver: RingerModeObserver
 
     override fun onCreate() {
         super.onCreate()
@@ -42,6 +45,11 @@ class NotificationModeButtonService : Service() {
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
             PixelFormat.TRANSLUCENT
         )
+
+        ringerObserver = RingerModeObserver(this) { mode ->
+            updateModeIcon()
+        }
+        ringerObserver.register()
 
         params.gravity = Gravity.TOP or Gravity.START
         params.x = dpToPx(0)
@@ -185,6 +193,8 @@ class NotificationModeButtonService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         floatingView?.let { windowManager.removeView(it) }
+
+        ringerObserver.unregister()
 
         // Send a broadcast to MainActivity
         val intent = Intent("SERVICE_DESTROYED")
