@@ -9,6 +9,8 @@ import android.view.*
 import android.widget.ImageView
 import androidx.core.app.NotificationCompat
 import android.content.SharedPreferences
+import android.provider.Settings
+import com.example.floatingmute.DndModeObserver
 
 class DNDButtonService : Service() {
 
@@ -17,6 +19,8 @@ class DNDButtonService : Service() {
     private lateinit var modeIcon: ImageView
 
     private lateinit var prefs: SharedPreferences
+
+    private var dndModeObserver: DndModeObserver? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -38,6 +42,16 @@ class DNDButtonService : Service() {
             layoutType,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
             PixelFormat.TRANSLUCENT
+        )
+
+        dndModeObserver = DndModeObserver(this) { zenMode ->
+            updateModeIcon()
+        }
+
+        contentResolver.registerContentObserver(
+            Settings.Global.getUriFor("zen_mode"),
+            false,
+            dndModeObserver!!
         )
 
         params.gravity = Gravity.TOP or Gravity.START
@@ -176,6 +190,10 @@ class DNDButtonService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         floatingView?.let { windowManager.removeView(it) }
+
+        dndModeObserver?.let {
+            contentResolver.unregisterContentObserver(it)
+        }
 
         // Send a broadcast to MainActivity
         val intent = Intent("SERVICE_DESTROYED")

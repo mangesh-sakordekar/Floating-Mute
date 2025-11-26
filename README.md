@@ -54,3 +54,4 @@ productivity and fun app.
 - Fixed acknowledgement dialog bug
 - Added functionality to track external volume change
 - Added functionality to track external ringer mode change
+- Added functionality to track external dnd mode change
