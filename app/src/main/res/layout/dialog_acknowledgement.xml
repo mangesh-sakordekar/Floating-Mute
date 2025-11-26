@@ -50,7 +50,7 @@
         android:id="@+id/ackDone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Done!"
+        android:text="Close"
         android:padding="12dp"
         android:textSize="14sp"
         android:textColor="@color/white"
