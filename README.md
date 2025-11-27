@@ -52,3 +52,5 @@ productivity and fun app.
 ## Changelogs v2.6.0
 
 - Changed package name, will register as a new app
+- Added updates to mirror service
+- Fixed dialog box issues
